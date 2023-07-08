@@ -1,6 +1,6 @@
-#include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
-#include "palabras.h"
+#include "./libraries/palabras/palabras.h"
+#include <SD.h>
 
 #define DEBUG 1
 
@@ -20,7 +20,6 @@ typedef struct
 } buttonInputs;
 
 LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
-FILE *palabras = fopen("./palabras.txt", "r"); // declaro como variable global
 char **vector;
 void setup()
 {
@@ -31,15 +30,7 @@ void setup()
   pinMode(BUTTON2, INPUT);
   pinMode(BUTTON3, INPUT);
   pinMode(BUTTON4, INPUT);
-  if (palabras == NULL)
-  {
-    lcd.setCursor(0, 0);
-    lcd.print("error al abrir");
-    lcd.setCursor(0, 1);
-    lcd.print("archivo");
-  }
-  else
-    vector = texto_a_vector(palabras);
+  
   
 
 }
@@ -48,10 +39,9 @@ void loop()
 {
   #if DEBUG 
   String test = palabra_random(vector);
-  lcd.setCursor(0, 0);
-  lcd.print(test);
+  // lcd.setCursor(0, 0);
+  // lcd.print(test);
   delay(3000);
-  lcd.clear();
+  // lcd.clear();
   #endif
 }
-
