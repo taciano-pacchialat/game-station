@@ -3,6 +3,8 @@
 
 #include <SD.h>
 #include <LiquidCrystal_I2C.h>
+#include <time.h>
+#include <stdlib.h>
 #include <Arduino.h>
 
 #define BOFF 1
@@ -11,14 +13,6 @@
 #define BUTTON2 12
 #define BUTTON3 11
 #define BUTTON4 10
-
-typedef struct 
-{
-  int pin1 : 1;
-  int pin2 : 1;
-  int pin3 : 1;
-  int pin4 : 1;
-} buttonInputs;
 
 unsigned int read_pins();
 int start_menu(LiquidCrystal_I2C& lcd);

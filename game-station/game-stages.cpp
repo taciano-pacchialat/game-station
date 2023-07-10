@@ -33,6 +33,7 @@ int start_menu(LiquidCrystal_I2C& lcd)
     if (state)
     {
       lcd.clear();
+      delay(200);
       return 0;
     }
   }
@@ -62,17 +63,31 @@ int select_players(LiquidCrystal_I2C& lcd)
     print_amount(lcd, players);
     state = read_pins();
     while (!state)
-      state = read_pins();
-      
+      state = read_pins();    
     if (state)
     {
       if (2 & state)
-        players++;
+        players += 1;
       else if ((1 & state) && (players > 2))
-        players--;
+        players -= 1;
       else if (4 & state)
         return players;
     }
+    delay(300);
   }
   return 0;
+}
+
+// creates an array of bools, each representing
+// a player. True if spy, false if not
+bool *set_spy(int amount_players)
+{
+  bool *roles = malloc(amount_players * (sizeof(bool)));
+  int i;
+  for (i = 0; i < amount_players; i++)
+    roles[i] = false;
+  randomSeed(analogRead(0));
+  int pos = random(0, amount_players + 1);
+  roles[pos] = true;
+  return roles;
 }
