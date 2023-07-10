@@ -13,9 +13,9 @@ void setup()
   lcd.init();
   lcd.backlight();
   start_menu(lcd);
-  int amount_players = select_players(lcd);
-  bool *roles = set_spy(amount_players);
-  
+  int amount_players = select_players_amount(lcd);
+  int amount_spies = select_spy_amount(lcd, amount_players);
+  bool *roles = set_spy(amount_players, amount_spies);
 }
 
 void loop()

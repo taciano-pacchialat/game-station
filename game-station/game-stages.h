@@ -3,9 +3,8 @@
 
 #include <SD.h>
 #include <LiquidCrystal_I2C.h>
-#include <time.h>
-#include <stdlib.h>
 #include <Arduino.h>
+#include <string.h>
 
 #define BOFF 1
 #define BON 0
@@ -16,6 +15,9 @@
 
 unsigned int read_pins();
 int start_menu(LiquidCrystal_I2C& lcd);
-int select_players(LiquidCrystal_I2C& lcd);
+int select_players_amount(LiquidCrystal_I2C& lcd);
+int select_spy_amount(LiquidCrystal_I2C& lcd, int amount_players);
+bool *set_spy(int amount_players, int amount_spies);
+void display_roles(LiquidCrystal_I2C& lcd, bool *roles, int amount_players, char *text);
 
 #endif
