@@ -16,6 +16,7 @@ void setup()
   int amount_players = select_players_amount(lcd);
   int amount_spies = select_spy_amount(lcd, amount_players);
   bool *roles = set_spy(amount_players, amount_spies);
+  String text = random_noun();
 }
 
 void loop()

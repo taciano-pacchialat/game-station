@@ -140,13 +140,14 @@ void print_role(LiquidCrystal_I2C& lcd, bool role, char *palabra)
     lcd.print(palabra);
 }
 
-void display_roles(LiquidCrystal_I2C lcd, bool *roles, int amount_players, char *text)
+// displays roles of current round
+void display_roles(LiquidCrystal_I2C lcd, bool *roles, int amount_players, String text)
 {
   int i = 0;
   unsigned int state;
   bool tag_displayed = false;
   bool undo = false;
-  while (1)
+  while (i <= amount_players)
   {
     state = read_pins();
     while (!state)
@@ -169,10 +170,31 @@ void display_roles(LiquidCrystal_I2C lcd, bool *roles, int amount_players, char 
     else if (8 & state)
     {
       undo = true;
+      tag_displayed = false;
       lcd.clear();
       i--;
     }
   delay(300);
   }
+}
 
+// returns a random noun from file 
+// "nouns.txt"
+String random_noun()
+{
+  if (!SD.begin(SPI_PIN)) {
+    Serial.println(F("SD CARD FAILED, OR NOT PRESENT!"));
+    while (1); // don't do anything more
+  }
+  File file = SD.open("nouns.txt", FILE_READ);
+  String text;
+  if (file)
+  {
+    randomSeed(analogRead(0));
+    int i = (int)random(1, WORDS_IN_FILE + 1);
+    i--;
+    for (int j = 0; j < i; j++)
+      file.readString();
+    return file.readString();
+  }
 }
