@@ -67,7 +67,10 @@ int select_players_amount(LiquidCrystal_I2C& lcd)
       else if ((1 & state) && (players > 2))
         players -= 1;
       else if (4 & state)
+      {
+        delay(300);
         return players;
+      }
     }
     delay(300);
   }
@@ -85,7 +88,8 @@ int select_spy_amount(LiquidCrystal_I2C& lcd, int amount_players)
   unsigned int state;
   while (1)
   {
-    print_amount(lcd, spies);
+    lcd.setCursor(14, 0);
+    lcd.print(spies);
     state = read_pins();
     while (!state)
       state = read_pins();    
@@ -96,7 +100,10 @@ int select_spy_amount(LiquidCrystal_I2C& lcd, int amount_players)
       else if ((1 & state) && (spies > 1))
         spies -= 1;
       else if (4 & state)
+      {
+        delay(300);
         return spies;
+      }
     }
     delay(300);
   }
@@ -132,7 +139,7 @@ void print_tag(LiquidCrystal_I2C& lcd, int position)
   lcd.setCursor(0, 1);
 }
 
-void print_role(LiquidCrystal_I2C& lcd, bool role, char *palabra)
+void print_role(LiquidCrystal_I2C& lcd, bool role, String palabra)
 {
   if (role)
     lcd.print("Espia");
@@ -141,7 +148,7 @@ void print_role(LiquidCrystal_I2C& lcd, bool role, char *palabra)
 }
 
 // displays roles of current round
-void display_roles(LiquidCrystal_I2C lcd, bool *roles, int amount_players, String text)
+void display_roles(LiquidCrystal_I2C& lcd, bool *roles, int amount_players, String text)
 {
   int i = 0;
   unsigned int state;
@@ -167,15 +174,16 @@ void display_roles(LiquidCrystal_I2C lcd, bool *roles, int amount_players, Strin
         tag_displayed = true;
       }
     }
-    else if (8 & state)
-    {
-      undo = true;
-      tag_displayed = false;
-      lcd.clear();
-      i--;
-    }
-  delay(300);
+    // else if (8 & state)
+    // {
+    //   undo = true;
+    //   tag_displayed = false;
+    //   lcd.clear();
+    //   i--;
+    // }
+    delay(300);
   }
+  delay(300);
 }
 
 // returns a random noun from file 
@@ -195,6 +203,7 @@ String random_noun()
     i--;
     for (int j = 0; j < i; j++)
       file.readString();
+    file.close();
     return file.readString();
   }
 }

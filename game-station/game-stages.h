@@ -1,10 +1,12 @@
 #ifndef GAME_STAGES
 #define GAME_STAGES
 
-#include <SD.h>
 #include <LiquidCrystal_I2C.h>
+#include <SD.h>
+#include <SPI.h>
 #include <Arduino.h>
 #include <string.h>
+#include <stdio.h>
 
 #define BOFF 1
 #define BON 0
@@ -12,7 +14,7 @@
 #define BUTTON2 12
 #define BUTTON3 11
 #define BUTTON4 10
-#define SPI_PIN 1
+#define SPI_PIN 7
 #define WORDS_IN_FILE 1204
 
 unsigned int read_pins();

@@ -1,8 +1,5 @@
 #include "game-stages.h"
 
-#define DEBUG 0
-
-
 void setup()
 {
   pinMode(BUTTON1, INPUT);
@@ -17,6 +14,7 @@ void setup()
   int amount_spies = select_spy_amount(lcd, amount_players);
   bool *roles = set_spy(amount_players, amount_spies);
   String text = random_noun();
+  display_roles(lcd, roles, amount_players, text);
 }
 
 void loop()
