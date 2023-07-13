@@ -1,0 +1,87 @@
+[
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino"
+  },
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/variants/standard"
+  },
+  {
+    "Sourcefile": "/home/taci/repos/arduino-for-fun/game-station/build/sketch/game-station.ino.cpp",
+    "Include": "LiquidCrystal_I2C.h",
+    "Includepath": "/home/taci/Arduino/libraries/LiquidCrystal_I2C"
+  },
+  {
+    "Sourcefile": "/home/taci/repos/arduino-for-fun/game-station/build/sketch/game-station.ino.cpp",
+    "Include": "Wire.h",
+    "Includepath": "/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src"
+  },
+  {
+    "Sourcefile": "/home/taci/repos/arduino-for-fun/game-station/build/sketch/game-station.ino.cpp",
+    "Include": "SD.h",
+    "Includepath": "/home/taci/Arduino/libraries/SD/src"
+  },
+  {
+    "Sourcefile": "/home/taci/repos/arduino-for-fun/game-station/build/sketch/game-station.ino.cpp",
+    "Include": "SPI.h",
+    "Includepath": "/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/SPI/src"
+  },
+  {
+    "Sourcefile": "/home/taci/repos/arduino-for-fun/game-station/build/sketch/game-station.ino.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/taci/repos/arduino-for-fun/game-station/build/sketch/game-stages.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/taci/Arduino/libraries/LiquidCrystal_I2C/LiquidCrystal_I2C.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src/Wire.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src/utility/twi.c",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/taci/Arduino/libraries/SD/src/File.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/taci/Arduino/libraries/SD/src/SD.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/taci/Arduino/libraries/SD/src/utility/Sd2Card.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/taci/Arduino/libraries/SD/src/utility/SdFile.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/taci/Arduino/libraries/SD/src/utility/SdVolume.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/SPI/src/SPI.cpp",
+    "Include": "",
+    "Includepath": null
+  }
+]

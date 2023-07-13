@@ -1,5 +1,12 @@
+#include <Arduino.h>
+#line 1 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
 #include "game-stages.h"
 
+#line 3 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
+void setup();
+#line 25 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
+void loop();
+#line 3 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
 void setup()
 {
   Serial.begin(115200);
@@ -26,4 +33,5 @@ void loop()
 {
 
 }
+
 

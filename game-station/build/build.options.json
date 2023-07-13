@@ -1,0 +1,11 @@
+{
+  "additionalFiles": "../../..,../../..,../../..,../../..,../../..,../..,../..",
+  "builtInToolsFolders": "",
+  "compiler.optimization_flags": "",
+  "customBuildProperties": "",
+  "fqbn": "arduino:avr:uno",
+  "hardwareFolders": "/home/taci/.arduino15/packages",
+  "otherLibrariesFolders": "/home/taci/Arduino/libraries",
+  "runtime.ide.version": "10607",
+  "sketchLocation": "/home/taci/repos/arduino-for-fun/game-station"
+}

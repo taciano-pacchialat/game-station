@@ -1,3 +1,4 @@
+#line 1 "/home/taci/repos/arduino-for-fun/game-station/game-stages.h"
 #ifndef GAME_STAGES
 #define GAME_STAGES
 

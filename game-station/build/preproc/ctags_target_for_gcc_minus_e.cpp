@@ -1,13 +1,14 @@
-#include "game-stages.h"
+# 1 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
+# 2 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino" 2
 
 void setup()
 {
   Serial.begin(115200);
-  pinMode(CS_PIN, OUTPUT);
-  pinMode(BUTTON1, INPUT);
-  pinMode(BUTTON2, INPUT);
-  pinMode(BUTTON3, INPUT);
-  pinMode(BUTTON4, INPUT);
+  pinMode(10, 0x1);
+  pinMode(7, 0x0);
+  pinMode(6, 0x0);
+  pinMode(5, 0x0);
+  pinMode(4, 0x0);
   LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
   lcd.init();
   lcd.backlight();
@@ -26,4 +27,3 @@ void loop()
 {
 
 }
-

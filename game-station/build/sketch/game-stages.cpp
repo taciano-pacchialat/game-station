@@ -1,3 +1,4 @@
+#line 1 "/home/taci/repos/arduino-for-fun/game-station/game-stages.cpp"
 #include "game-stages.h"
 
 #define LCDPROP 0x27, 16, 2
