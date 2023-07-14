@@ -12,10 +12,6 @@ unsigned int read_pins()
   state |= (!(digitalRead(BUTTON2)) << 2);
   state |= (!(digitalRead(BUTTON3)) << 1);
   state |= (!(digitalRead(BUTTON4)) << 0);
-  #if DEBUG
-    Serial.begin(9600);
-    Serial.println(state);
-  #endif
   return state;
 }
 
@@ -119,10 +115,9 @@ void print_bool_array(bool *arg, int dim)
     Serial.print(i);
     Serial.print(": ");
     if (arg[i])
-      Serial.print("Spy");
+      Serial.print("Spy\n");
     else
-      Serial.print("Not Spy");
-      
+      Serial.print("Not Spy\n");
   }
   Serial.println();
 }
@@ -135,14 +130,17 @@ bool *set_spy(int amount_players, int amount_spies)
   int i;
   for (i = 0; i < amount_players; i++)
     roles[i] = false;
-  randomSeed(analogRead(0));
-
-  for (i = 0; i < amount_spies; i++)
+  i = 0;
+  while (i < amount_spies)
   {
+    randomSeed(analogRead(0));
     int pos = random(0, amount_players + 1);
+    Serial.print("posicion de espia: ");
+    Serial.println(pos);
     if (!roles[pos])
       roles[pos] = true;
-  }
+      i++    
+  }  
   print_bool_array(roles, amount_players);
   return roles;
 }
@@ -153,7 +151,7 @@ void print_tag(LiquidCrystal_I2C& lcd, int position)
   lcd.setCursor(0, 0);
   lcd.print("Jugador: ");
   lcd.setCursor(11, 0);
-  lcd.print(position);
+  lcd.print(position + 1);
   lcd.setCursor(0, 1);
 }
 
@@ -171,14 +169,13 @@ void display_roles(LiquidCrystal_I2C& lcd, bool *roles, int amount_players, Stri
   int i = 0;
   unsigned int state;
   bool tag_displayed = false;
-  bool undo = false;
   while (i < amount_players)
   {
     state = read_pins();
     while (!state)
       state = read_pins();
 
-    if ((4 & state) || undo)
+    if (4 & state)
     {
       if (tag_displayed)
       {
@@ -192,13 +189,17 @@ void display_roles(LiquidCrystal_I2C& lcd, bool *roles, int amount_players, Stri
         tag_displayed = true;
       }
     }
-    // else if (8 & state)
-    // {
-    //   undo = true;
-    //   tag_displayed = false;
-    //   lcd.clear();
-    //   i--;
-    // }
+    else if ((8 & state) && (i > 0))
+    {
+      tag_displayed = false;
+      lcd.clear();
+      if (!tag_displayed && (i > 1))
+        i -= 2;
+      else
+        i--;
+    }
+    Serial.print("i = ");
+    Serial.println(i);
     delay(300);
   }
   delay(300);
@@ -206,7 +207,7 @@ void display_roles(LiquidCrystal_I2C& lcd, bool *roles, int amount_players, Stri
 
 // returns a random noun from file 
 // "nouns.txt"
-String random_noun()
+String random_noun(node **list)
 {
   SD.begin(CS_PIN);
   String text;
@@ -221,12 +222,17 @@ String random_noun()
     randomSeed(analogRead(0));
     int i = random(1, WORDS_IN_FILE + 1);
     String result;
-    for (int j = 0; j < i; j++)
-      result = file.readStringUntil('\n');
-    file.close();
-    Serial.println(result);
-    file.close();
-    return result;
+    while (1)
+    {
+      for (int j = 0; j < i; j++)
+        result = file.readStringUntil('\n');
+      if (!contains(result, *list))
+      {
+        file.close();
+        add_first(result, list);
+        return result;
+      }
+    }
   }
   else
     Serial.println("File opening failed");

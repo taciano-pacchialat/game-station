@@ -40,6 +40,11 @@
     "Includepath": null
   },
   {
+    "Sourcefile": "/home/taci/repos/arduino-for-fun/game-station/build/sketch/string_list.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
     "Sourcefile": "/home/taci/Arduino/libraries/LiquidCrystal_I2C/LiquidCrystal_I2C.cpp",
     "Include": "",
     "Includepath": null

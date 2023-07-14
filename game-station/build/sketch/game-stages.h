@@ -6,6 +6,7 @@
 #include <SD.h>
 #include <SPI.h>
 #include <Arduino.h>
+#include "string_list.h"
 
 #define BOFF 1
 #define BON 0

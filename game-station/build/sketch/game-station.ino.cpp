@@ -4,7 +4,7 @@
 
 #line 3 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
 void setup();
-#line 25 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
+#line 24 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
 void loop();
 #line 3 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
 void setup()
@@ -18,11 +18,10 @@ void setup()
   LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
   lcd.init();
   lcd.backlight();
+  lcd.setContrast()
   start_menu(lcd);
   int amount_players = select_players_amount(lcd);
   int amount_spies = select_spy_amount(lcd, amount_players);
-  Serial.print("Spy amount: ");
-  Serial.println(amount_spies);
   bool *roles = set_spy(amount_players, amount_spies);
   String text = random_noun();
   Serial.println(text);
