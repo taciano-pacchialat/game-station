@@ -35,12 +35,12 @@
     "Includepath": null
   },
   {
-    "Sourcefile": "/home/taci/repos/arduino-for-fun/game-station/build/sketch/game-stages.cpp",
+    "Sourcefile": "/home/taci/repos/arduino-for-fun/game-station/build/sketch/ilist.c",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "/home/taci/repos/arduino-for-fun/game-station/build/sketch/string_list.cpp",
+    "Sourcefile": "/home/taci/repos/arduino-for-fun/game-station/build/sketch/spy.cpp",
     "Include": "",
     "Includepath": null
   },

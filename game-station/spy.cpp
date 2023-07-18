@@ -1,5 +1,4 @@
-#line 1 "/home/taci/repos/arduino-for-fun/game-station/game-stages.cpp"
-#include "game-stages.h"
+#include "spy.h"
 
 #define LCDPROP 0x27, 16, 2
 
@@ -139,7 +138,7 @@ bool *set_spy(int amount_players, int amount_spies)
     Serial.println(pos);
     if (!roles[pos])
       roles[pos] = true;
-      i++    
+      i++;    
   }  
   print_bool_array(roles, amount_players);
   return roles;
@@ -207,10 +206,9 @@ void display_roles(LiquidCrystal_I2C& lcd, bool *roles, int amount_players, Stri
 
 // returns a random noun from file 
 // "nouns.txt"
-String random_noun(node **list)
+int random_noun(String& text, node *words_used)
 {
   SD.begin(CS_PIN);
-  String text;
   if (!SD.begin(CS_PIN))
   {
     Serial.print("Failed initializing SD\n");
@@ -219,21 +217,34 @@ String random_noun(node **list)
   File file = SD.open("nouns.txt", FILE_READ);
   if (file)
   {
-    randomSeed(analogRead(0));
-    int i = random(1, WORDS_IN_FILE + 1);
-    String result;
     while (1)
     {
+      randomSeed(analogRead(0));
+      int i = random(1, WORDS_IN_FILE + 1);
       for (int j = 0; j < i; j++)
-        result = file.readStringUntil('\n');
-      if (!contains(result, *list))
-      {
-        file.close();
-        add_first(result, list);
-        return result;
-      }
+        text = file.readStringUntil('\n');
+      if (!is_included(words_used, i))
+        return i;
     }
   }
   else
     Serial.println("File opening failed");
+}
+
+// plays an entire game of the spy
+int spy_game(LiquidCrystal_I2C& lcd)
+{
+  lcd.init();
+  lcd.backlight();
+  node *words_used = NULL;
+  String current_word;
+  start_menu(lcd);
+  int amount_players = select_players_amount(lcd);
+  int amount_spies = select_spy_amount(lcd, amount_players);
+  bool *roles = set_spy(amount_players, amount_spies);
+  int index = random_noun(current_word, words_used);
+  add_last(&words_used, index);
+  Serial.println(current_word);
+  display_roles(lcd, roles, amount_players, current_word);
+  return index;
 }
