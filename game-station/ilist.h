@@ -1,7 +1,6 @@
 #ifndef INTEGER_LIST
 #define INTEGER_LIST
 
-#include <Arduino.h>
 
 struct node 
 {
@@ -17,6 +16,6 @@ void print_list(node *list);
 void add_last(node **list, int data);
 int list_size(node *list);
 void delete_list(node **list);
-bool is_included(node *list, int number);
+int is_included(node *list, int number);
 
 #endif
