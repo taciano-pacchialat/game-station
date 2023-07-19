@@ -3,11 +3,17 @@
 #include <stdio.h>
 #include "./ilist.h"
 
+/* 
+Integer linked list library.
+*/
+
+// initializes the list
 void initialize_list(node **list)
 {
   *list = NULL;
 }
 
+// adds a node to the beggining of the list
 void add_first(node **list, int data)
 {
   node *new_node;
@@ -17,6 +23,7 @@ void add_first(node **list, int data)
   *list = new_node;
 }
 
+// prints the list
 void print_list(node *list)
 {
   while (list != NULL)
@@ -27,8 +34,7 @@ void print_list(node *list)
   printf("NULL\n");
 }
 
-// **list es el node
-// *list es el puntero
+// adds a node to the end of the list
 void add_last(node **list, int data)
 {
   if (*list == NULL)
@@ -38,10 +44,7 @@ void add_last(node **list, int data)
     node *aux;
     aux = *list;
     while (aux->next != NULL)
-    {
-      printf("data: %d\n", aux->data);
       aux = aux->next;
-    }
     node *new_node;
     new_node = (node *)malloc(sizeof(node));
     new_node->next = NULL;
@@ -50,6 +53,7 @@ void add_last(node **list, int data)
   }
 }
 
+// returns the amount of nodes contained in the list
 int list_size(node *list)
 {
   int size = 0;
@@ -61,6 +65,7 @@ int list_size(node *list)
   return size;
 }
 
+// deletes the list from the heap
 void delete_list(node **list)
 {
   node *aux;
@@ -72,7 +77,9 @@ void delete_list(node **list)
   }
 }
 
-bool is_included(node *list, int number)
+// 0 if the number is not included 
+// 1 if it is
+int is_included(node *list, int number)
 {
   while ((list->next != NULL) && (list->data != number))
     list = list->next;

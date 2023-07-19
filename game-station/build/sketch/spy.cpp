@@ -19,6 +19,8 @@ unsigned int read_pins()
 // reads pins
 int start_menu(LiquidCrystal_I2C& lcd)
 {
+  lcd.clear();
+  lcd.backlight();
   lcd.setCursor(0, 0);
   lcd.print("Presionar");
   lcd.setCursor(0, 1);
@@ -30,7 +32,7 @@ int start_menu(LiquidCrystal_I2C& lcd)
     if (state)
     {
       lcd.clear();
-      delay(200);
+      delay(BUTTON_DELAY);
       return 0;
     }
   }
@@ -48,6 +50,7 @@ void print_amount(LiquidCrystal_I2C& lcd, int amount)
 int select_players_amount(LiquidCrystal_I2C& lcd)
 {
   int players = 2;
+  lcd.backlight();
   lcd.setCursor(0, 0);
   lcd.print("Jugadores:");
   unsigned int state;
@@ -65,11 +68,11 @@ int select_players_amount(LiquidCrystal_I2C& lcd)
         players -= 1;
       else if (4 & state)
       {
-        delay(300);
+        delay(BUTTON_DELAY);
         return players;
       }
     }
-    delay(300);
+    delay(BUTTON_DELAY);
   }
   return 0;
 }
@@ -80,6 +83,7 @@ int select_spy_amount(LiquidCrystal_I2C& lcd, int amount_players)
 {
   int spies = 1;
   lcd.clear();
+  lcd.backlight();
   lcd.setCursor(0, 0);
   lcd.print("Espias:");
   unsigned int state;
@@ -98,11 +102,11 @@ int select_spy_amount(LiquidCrystal_I2C& lcd, int amount_players)
         spies -= 1;
       else if (4 & state)
       {
-        delay(300);
+        delay(BUTTON_DELAY);
         return spies;
       }
     }
-    delay(300);
+    delay(BUTTON_DELAY);
   }
   return 0;
 }
@@ -135,13 +139,10 @@ bool *set_spy(int amount_players, int amount_spies)
   {
     randomSeed(analogRead(0));
     int pos = random(0, amount_players + 1);
-    Serial.print("posicion de espia: ");
-    Serial.println(pos);
     if (!roles[pos])
       roles[pos] = true;
       i++;    
   }  
-  print_bool_array(roles, amount_players);
   return roles;
 }
 
@@ -169,6 +170,7 @@ void display_roles(LiquidCrystal_I2C& lcd, bool *roles, int amount_players, Stri
   int i = 0;
   unsigned int state;
   bool tag_displayed = false;
+  lcd.backlight();
   while (i < amount_players)
   {
     state = read_pins();
@@ -200,9 +202,9 @@ void display_roles(LiquidCrystal_I2C& lcd, bool *roles, int amount_players, Stri
     }
     Serial.print("i = ");
     Serial.println(i);
-    delay(300);
+    delay(BUTTON_DELAY);
   }
-  delay(300);
+  delay(BUTTON_DELAY);
 }
 
 // returns a random noun from file 
@@ -232,6 +234,23 @@ int random_noun(String& text, node *words_used)
     Serial.println("File opening failed");
 }
 
+// displays the end screen for a round
+void end_screen(LiquidCrystal_I2C& lcd)
+{
+  delay(BUTTON_DELAY);
+  lcd.clear();
+  lcd.backlight();
+  lcd.print("presionar ->");
+  lcd.setCursor(0, 1);
+  lcd.print("para otra");
+  unsigned int state;
+  state = read_pins();
+  while (!(state & 4))
+    state = read_pins();
+  delay(BUTTON_DELAY);
+  lcd.clear();
+}
+
 // plays an entire game of the spy
 int spy_game(LiquidCrystal_I2C& lcd)
 {
@@ -239,13 +258,16 @@ int spy_game(LiquidCrystal_I2C& lcd)
   lcd.backlight();
   node *words_used = NULL;
   String current_word;
+  unsigned int state;
   start_menu(lcd);
   int amount_players = select_players_amount(lcd);
   int amount_spies = select_spy_amount(lcd, amount_players);
-  bool *roles = set_spy(amount_players, amount_spies);
-  int index = random_noun(current_word, words_used);
-  add_last(&words_used, index);
-  Serial.println(current_word);
-  display_roles(lcd, roles, amount_players, current_word);
-  return index;
+  while (1)
+  {
+    bool *roles = set_spy(amount_players, amount_spies);
+    int index = random_noun(current_word, words_used);
+    add_last(&words_used, index);
+    display_roles(lcd, roles, amount_players, current_word);
+    end_screen(lcd);
+  }
 }

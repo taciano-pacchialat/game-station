@@ -5,7 +5,10 @@
 #include <SD.h>
 #include <SPI.h>
 #include <Arduino.h>
-#include "ilist.h"
+
+extern "C" {
+  #include "ilist.h"
+};
 
 #define BOFF 1
 #define BON 0
@@ -15,6 +18,7 @@
 #define BUTTON4 4
 #define CS_PIN 10
 #define WORDS_IN_FILE 2353
+#define BUTTON_DELAY 500
 
 
 int spy_game(LiquidCrystal_I2C& lcd);
