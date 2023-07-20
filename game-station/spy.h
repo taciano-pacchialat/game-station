@@ -7,9 +7,7 @@
 #include <Arduino.h>
 #include "file-managing.h"
 
-extern "C" {
-  #include "ilist.h"
-};
+
 
 #define BOFF 1
 #define BON 0
@@ -17,7 +15,6 @@ extern "C" {
 #define BUTTON2 6
 #define BUTTON3 5
 #define BUTTON4 4
-#define WORDS_IN_FILE 2353
 #define BUTTON_DELAY 500
 
 int spy_game(LiquidCrystal_I2C& lcd);

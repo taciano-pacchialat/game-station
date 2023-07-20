@@ -1,6 +1,9 @@
 #include "spy.h"
 #include "file-managing.h"
 
+
+//TODO make ilist a char * linked list
+
 void setup()
 {
   Serial.begin(115200);

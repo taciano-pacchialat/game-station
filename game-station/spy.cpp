@@ -208,30 +208,30 @@ void display_roles(LiquidCrystal_I2C& lcd, bool *roles, int amount_players, Stri
 
 // returns a random noun from file 
 // "nouns.txt"
-// int random_noun(String& text, node *words_used)
-// {
-//   SD.begin(CS_PIN);
-//   if (!SD.begin(CS_PIN))
-//   {
-//     Serial.print("Failed initializing SD\n");
-//     while(1);
-//   }
-//   File file = SD.open("nouns.txt", FILE_READ);
-//   if (file)
-//   {
-//     while (1)
-//     {
-//       randomSeed(analogRead(0));
-//       int i = random(1, WORDS_IN_FILE + 1);
-//       for (int j = 0; j < i; j++)
-//         text = file.readStringUntil('\n');
-//       if (!is_included(words_used, i))
-//         return i;
-//     }
-//   }
-//   else
-//     Serial.println("File opening failed");
-// }
+int random_noun(String& text, node *words_used)
+{
+  SD.begin(CS_PIN);
+  if (!SD.begin(CS_PIN))
+  {
+    Serial.print("Failed initializing SD\n");
+    while(1);
+  }
+  File file = SD.open("nouns.txt", FILE_READ);
+  if (file)
+  {
+    while (1)
+    {
+      randomSeed(analogRead(0));
+      int i = random(1, WORDS_IN_FILE + 1);
+      for (int j = 0; j < i; j++)
+        text = file.readStringUntil('\n');
+      if (!is_included(words_used, i))
+        return i;
+    }
+  }
+  else
+    Serial.println("File opening failed");
+}
 
 // displays the end screen for a round
 void end_screen(LiquidCrystal_I2C& lcd)
