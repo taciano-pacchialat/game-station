@@ -5,6 +5,7 @@
 #include <SD.h>
 #include <SPI.h>
 #include <Arduino.h>
+#include "file-managing.h"
 
 extern "C" {
   #include "ilist.h"
@@ -16,11 +17,11 @@ extern "C" {
 #define BUTTON2 6
 #define BUTTON3 5
 #define BUTTON4 4
-#define CS_PIN 10
 #define WORDS_IN_FILE 2353
 #define BUTTON_DELAY 500
 
-
 int spy_game(LiquidCrystal_I2C& lcd);
+unsigned int read_pins();
+
 
 #endif

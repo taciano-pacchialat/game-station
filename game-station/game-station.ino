@@ -1,4 +1,5 @@
 #include "spy.h"
+#include "file-managing.h"
 
 void setup()
 {
@@ -9,7 +10,10 @@ void setup()
   pinMode(BUTTON2, INPUT);
   pinMode(BUTTON3, INPUT);
   pinMode(BUTTON4, INPUT);
-  spy_game(lcd);  
+  File nouns;
+  File verbs;
+  initialize_file(nouns, "nouns.txt");
+  initialize_file(verbs, "verbs.txt");
 }
 
 void loop()

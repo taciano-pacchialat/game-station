@@ -1,12 +1,13 @@
 #include <Arduino.h>
 #line 1 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
 #include "spy.h"
+#include "file-managing.h"
 
-#line 3 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
+#line 4 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
 void setup();
-#line 15 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
+#line 19 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
 void loop();
-#line 3 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
+#line 4 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
 void setup()
 {
   Serial.begin(115200);
@@ -16,7 +17,10 @@ void setup()
   pinMode(BUTTON2, INPUT);
   pinMode(BUTTON3, INPUT);
   pinMode(BUTTON4, INPUT);
-  spy_game(lcd);  
+  File nouns;
+  File verbs;
+  initialize_file(nouns, "nouns.txt");
+  initialize_file(verbs, "verbs.txt");
 }
 
 void loop()
