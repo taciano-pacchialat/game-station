@@ -206,33 +206,6 @@ void display_roles(LiquidCrystal_I2C& lcd, bool *roles, int amount_players, Stri
   delay(BUTTON_DELAY);
 }
 
-// returns a random noun from file 
-// "nouns.txt"
-int random_noun(String& text, node *words_used)
-{
-  SD.begin(CS_PIN);
-  if (!SD.begin(CS_PIN))
-  {
-    Serial.print("Failed initializing SD\n");
-    while(1);
-  }
-  File file = SD.open("nouns.txt", FILE_READ);
-  if (file)
-  {
-    while (1)
-    {
-      randomSeed(analogRead(0));
-      int i = random(1, WORDS_IN_FILE + 1);
-      for (int j = 0; j < i; j++)
-        text = file.readStringUntil('\n');
-      if (!is_included(words_used, i))
-        return i;
-    }
-  }
-  else
-    Serial.println("File opening failed");
-}
-
 // displays the end screen for a round
 void end_screen(LiquidCrystal_I2C& lcd)
 {
@@ -258,15 +231,17 @@ int spy_game(LiquidCrystal_I2C& lcd)
   node *words_used = NULL;
   String current_word;
   unsigned int state;
+  File nouns;
+  initialize_file(nouns, "nouns.txt");
   start_menu(lcd);
   int amount_players = select_players_amount(lcd);
   int amount_spies = select_spy_amount(lcd, amount_players);
   while (1)
   {
     bool *roles = set_spy(amount_players, amount_spies);
-    int index = random_noun(current_word, words_used);
-    add_last(&words_used, index);
-    display_roles(lcd, roles, amount_players, current_word);
+    String text = random_word(nouns, &words_used);
+    display_roles(lcd, roles, amount_players, text);
     end_screen(lcd);
   }
+  return 0;
 }

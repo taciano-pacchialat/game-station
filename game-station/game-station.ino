@@ -1,9 +1,6 @@
 #include "spy.h"
 #include "file-managing.h"
 
-
-//TODO make ilist a char * linked list
-
 void setup()
 {
   Serial.begin(115200);
@@ -13,10 +10,7 @@ void setup()
   pinMode(BUTTON2, INPUT);
   pinMode(BUTTON3, INPUT);
   pinMode(BUTTON4, INPUT);
-  File nouns;
-  File verbs;
-  initialize_file(nouns, "nouns.txt");
-  initialize_file(verbs, "verbs.txt");
+  spy_game(lcd);
 }
 
 void loop()

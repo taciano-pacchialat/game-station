@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdio.h>
 
-struct node 
+struct node
 {
   char *data;
   struct node *next;
@@ -14,11 +14,11 @@ struct node
 typedef struct node node;
 
 void initialize_list(node **list);
-void add_first(node **list, char *data);
+void add_first(node **list, const char *data);
 void print_list(node *list);
-void add_last(node **list, char *data);
+void add_last(node **list, const char *data);
 int list_size(node *list);
 void delete_list(node **list);
-int is_included(node *list, char *data);
+int is_included(node *list, const char *data);
 
 #endif

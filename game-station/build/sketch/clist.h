@@ -1,0 +1,25 @@
+#line 1 "/home/taci/repos/arduino-for-fun/game-station/clist.h"
+#ifndef CHAR_LIST_INCLUDED
+#define CHAR_LIST_INCLUDED
+
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+
+struct node
+{
+  char *data;
+  struct node *next;
+};
+
+typedef struct node node;
+
+void initialize_list(node **list);
+void add_first(node **list, const char *data);
+void print_list(node *list);
+void add_last(node **list, const char *data);
+int list_size(node *list);
+void delete_list(node **list);
+int is_included(node *list, const char *data);
+
+#endif

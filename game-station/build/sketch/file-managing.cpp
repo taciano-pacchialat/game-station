@@ -1,13 +1,13 @@
 #line 1 "/home/taci/repos/arduino-for-fun/game-station/file-managing.cpp"
 #include "file-managing.h"
 
-void initialize_file(File& file, String name)
+// initializes a file called "name"
+void initialize_file(File& file, const String name)
 {
-  SD.begin(CS_PIN);
   if (!SD.begin(CS_PIN))
   {
-    Serial.print("Failed initializing SD\n");
-    while(1);
+    Serial.print("Failed initializing SD card\n");
+    while (1);
   }
   file = SD.open(name, FILE_READ);
   if (!file)
@@ -16,4 +16,29 @@ void initialize_file(File& file, String name)
     while (1);
   }
 }
+
+// returns a random word from the file
+String random_word(File& file, node **words_used)
+{
+  if (file)
+  {
+    String text;
+    while (1)
+    {
+      randomSeed(analogRead(0));
+      int i = random(1, WORDS_IN_FILE + 1);
+      for (int j = 0; j < i; j++)
+        text = file.readStringUntil('\n');
+      if (!is_included(*words_used, text.c_str()))
+      {
+        add_first(words_used, text.c_str());
+        return text;
+      }
+    }
+  }
+  else
+    Serial.println("File reading failed");
+  file.close();
+}
+
 
