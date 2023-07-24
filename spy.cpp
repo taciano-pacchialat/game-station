@@ -14,30 +14,6 @@ unsigned int read_pins()
   return state;
 }
 
-// sends start message to lcd
-// reads pins
-// depricated due to charades implementation
-int start_menu(LiquidCrystal_I2C &lcd)
-{
-  lcd.clear();
-  lcd.backlight();
-  lcd.setCursor(0, 0);
-  lcd.print("Presionar");
-  lcd.setCursor(0, 1);
-  lcd.print("cualquier boton");
-  unsigned int state;
-  while (1)
-  {
-    state = read_pins();
-    if (state)
-    {
-      lcd.clear();
-      delay(BUTTON_DELAY);
-      return 0;
-    }
-  }
-}
-
 void print_amount(LiquidCrystal_I2C &lcd, int amount)
 {
   lcd.setCursor(14, 0);
@@ -130,7 +106,7 @@ void print_bool_array(bool *arg, int dim)
 // a player. True if spy, false if not
 bool *set_spy(int amount_players, int amount_spies)
 {
-  bool *roles = malloc(amount_players * (sizeof(bool)));
+  bool *roles = (bool *)malloc(amount_players * (sizeof(bool)));
   int i;
   for (i = 0; i < amount_players; i++)
     roles[i] = false;
@@ -234,7 +210,6 @@ int spy_game(LiquidCrystal_I2C &lcd)
   unsigned int state;
   File nouns;
   initialize_file(nouns, "nouns.txt");
-  start_menu(lcd);
   int amount_players = select_players_amount(lcd);
   int amount_spies = select_spy_amount(lcd, amount_players);
   while (1)
