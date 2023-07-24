@@ -1,28 +1,11 @@
 #include "spy.h"
+#include "charades.h"
 #include "file-managing.h"
 
 #define CHARADES 1
 #define SPY 0
 
-int start_menu(LiquidCrystal_l2C &lcd)
-{
-  lcd.backlight();
-  lcd.setCursor(0, 0);
-  lcd.print("<- Espia");
-  lcd.print("-> Digalo ...");
-  unsigned int state = 0;
-  while (1)
-  {
-    state = read_pins();
-    if (state)
-    {
-      if (8 & state)
-        return CHARADES;
-      else if (4 & state)
-        return SPY
-    }
-  }
-}
+int start_menu(LiquidCrystal_I2C &lcd);
 
 void setup()
 {
@@ -42,4 +25,25 @@ void setup()
 
 void loop()
 {
+}
+
+int start_menu(LiquidCrystal_I2C &lcd)
+{
+  lcd.backlight();
+  lcd.setCursor(0, 0);
+  lcd.print("<- Espia");
+  lcd.setCursor(0, 1);
+  lcd.print("-> Digalo ...");
+  unsigned int state = 0;
+  while (1)
+  {
+    state = read_pins();
+    if (state)
+    {
+      if (8 & state)
+        return CHARADES;
+      else if (4 & state)
+        return SPY;
+    }
+  }
 }
