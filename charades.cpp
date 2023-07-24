@@ -28,6 +28,27 @@ int set_round_duration(LiquidCrystal_I2C &lcd)
   }
 }
 
+void player_prepare(LiquidCrystal_I2C &lcd)
+{
+  lcd.clear();
+  lcd.backlight();
+  lcd.setCursor(0, 0);
+  lcd.print("Presionar ->");
+  lcd.setCursor(0, 1);
+  lcd.print("para comenzar");
+  unsigned int state = 0;
+  while (1)
+  {
+    while (!state)
+      state = read_pins();
+    if (4 & state)
+    {
+      delay(BUTTON_DELAY);
+      return;
+    }
+  }
+}
+
 // plays an entire game of charades
 void charades_game(LiquidCrystal_I2C &lcd)
 {
