@@ -1,4 +1,4 @@
-#line 1 "/home/taci/repos/arduino-for-fun/game-station/clist.c"
+#line 1 "/home/taci/repos/game-station/clist.c"
 #include "./clist.h"
 
 /*

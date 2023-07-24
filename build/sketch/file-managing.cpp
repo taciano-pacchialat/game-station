@@ -1,4 +1,4 @@
-#line 1 "/home/taci/repos/arduino-for-fun/game-station/file-managing.cpp"
+#line 1 "/home/taci/repos/game-station/file-managing.cpp"
 #include "file-managing.h"
 
 // initializes a file called "name"

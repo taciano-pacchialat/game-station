@@ -1,4 +1,4 @@
-#line 1 "/home/taci/repos/arduino-for-fun/game-station/clist.h"
+#line 1 "/home/taci/repos/game-station/clist.h"
 #ifndef CHAR_LIST_INCLUDED
 #define CHAR_LIST_INCLUDED
 

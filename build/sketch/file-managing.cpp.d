@@ -1,6 +1,6 @@
-/home/taci/repos/arduino-for-fun/game-station/build/sketch/file-managing.cpp.o: \
- /home/taci/repos/arduino-for-fun/game-station/build/sketch/file-managing.cpp \
- /home/taci/repos/arduino-for-fun/game-station/build/sketch/file-managing.h \
+/home/taci/repos/game-station/build/sketch/file-managing.cpp.o: \
+ /home/taci/repos/game-station/build/sketch/file-managing.cpp \
+ /home/taci/repos/game-station/build/sketch/file-managing.h \
  /home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino/Arduino.h \
  /home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino/binary.h \
  /home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino/WCharacter.h \
@@ -21,4 +21,4 @@
  /home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino/Print.h \
  /home/taci/Arduino/libraries/SD/src/utility/SdFatUtil.h \
  /home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/SPI/src/SPI.h \
- /home/taci/repos/arduino-for-fun/game-station/build/sketch/clist.h
+ /home/taci/repos/game-station/build/sketch/clist.h

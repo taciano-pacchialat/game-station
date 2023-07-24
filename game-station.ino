@@ -1,6 +1,29 @@
 #include "spy.h"
 #include "file-managing.h"
 
+#define CHARADES 1
+#define SPY 0
+
+int start_menu(LiquidCrystal_l2C &lcd)
+{
+  lcd.backlight();
+  lcd.setCursor(0, 0);
+  lcd.print("<- Espia");
+  lcd.print("-> Digalo ...");
+  unsigned int state = 0;
+  while (1)
+  {
+    state = read_pins();
+    if (state)
+    {
+      if (8 & state)
+        return CHARADES;
+      else if (4 & state)
+        return SPY
+    }
+  }
+}
+
 void setup()
 {
   Serial.begin(115200);
@@ -10,11 +33,13 @@ void setup()
   pinMode(BUTTON2, INPUT);
   pinMode(BUTTON3, INPUT);
   pinMode(BUTTON4, INPUT);
-  spy_game(lcd);
+  int game = start_menu(lcd);
+  if (game == CHARADES)
+    charades_game(lcd);
+  else
+    spy_game(lcd);
 }
 
 void loop()
 {
-
 }
-

@@ -1,15 +1,23 @@
 #include <Arduino.h>
-#line 1 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
+#line 1 "/home/taci/repos/game-station/game-station.ino"
 #include "spy.h"
 #include "file-managing.h"
 
-#define DEBUG 1
+#define CHARADES 1
+#define SPY 0
 
-#line 6 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
+#line 7 "/home/taci/repos/game-station/game-station.ino"
+int start_menu(LiquidCrystal_l2C &lcd);
+#line 12 "/home/taci/repos/game-station/game-station.ino"
 void setup();
-#line 18 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
+#line 24 "/home/taci/repos/game-station/game-station.ino"
 void loop();
-#line 6 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
+#line 7 "/home/taci/repos/game-station/game-station.ino"
+int start_menu(LiquidCrystal_l2C &lcd)
+{
+  lcd.backlight();
+}
+
 void setup()
 {
   Serial.begin(115200);
@@ -19,12 +27,10 @@ void setup()
   pinMode(BUTTON2, INPUT);
   pinMode(BUTTON3, INPUT);
   pinMode(BUTTON4, INPUT);
-  spy_game(lcd);
+  int game = start_menu(lcd);
 }
 
 void loop()
 {
-
 }
-
 

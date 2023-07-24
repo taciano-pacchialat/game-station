@@ -1,4 +1,4 @@
-#line 1 "/home/taci/repos/arduino-for-fun/game-station/spy.h"
+#line 1 "/home/taci/repos/game-station/spy.h"
 #ifndef GAME_STAGES
 #define GAME_STAGES
 

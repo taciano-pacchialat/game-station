@@ -1,8 +1,14 @@
-# 1 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino"
-# 2 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino" 2
-# 3 "/home/taci/repos/arduino-for-fun/game-station/game-station.ino" 2
+# 1 "/home/taci/repos/game-station/game-station.ino"
+# 2 "/home/taci/repos/game-station/game-station.ino" 2
+# 3 "/home/taci/repos/game-station/game-station.ino" 2
 
 
+
+
+int start_menu(LiquidCrystal_l2C &lcd)
+{
+  lcd.backlight();
+}
 
 void setup()
 {
@@ -13,10 +19,9 @@ void setup()
   pinMode(6, 0x0);
   pinMode(5, 0x0);
   pinMode(4, 0x0);
-  spy_game(lcd);
+  int game = start_menu(lcd);
 }
 
 void loop()
 {
-
 }

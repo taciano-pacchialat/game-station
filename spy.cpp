@@ -16,7 +16,8 @@ unsigned int read_pins()
 
 // sends start message to lcd
 // reads pins
-int start_menu(LiquidCrystal_I2C& lcd)
+// depricated due to charades implementation
+int start_menu(LiquidCrystal_I2C &lcd)
 {
   lcd.clear();
   lcd.backlight();
@@ -37,7 +38,7 @@ int start_menu(LiquidCrystal_I2C& lcd)
   }
 }
 
-void print_amount(LiquidCrystal_I2C& lcd, int amount)
+void print_amount(LiquidCrystal_I2C &lcd, int amount)
 {
   lcd.setCursor(14, 0);
   lcd.print(amount);
@@ -46,7 +47,7 @@ void print_amount(LiquidCrystal_I2C& lcd, int amount)
 // where the amount of players is selected
 // returns the amount of players
 // returns 0 when there was an error
-int select_players_amount(LiquidCrystal_I2C& lcd)
+int select_players_amount(LiquidCrystal_I2C &lcd)
 {
   int players = 2;
   lcd.backlight();
@@ -58,7 +59,7 @@ int select_players_amount(LiquidCrystal_I2C& lcd)
     print_amount(lcd, players);
     state = read_pins();
     while (!state)
-      state = read_pins();    
+      state = read_pins();
     if (state)
     {
       if (2 & state)
@@ -78,7 +79,7 @@ int select_players_amount(LiquidCrystal_I2C& lcd)
 
 // menu for setting the amount of spies
 // and returns it
-int select_spy_amount(LiquidCrystal_I2C& lcd, int amount_players)
+int select_spy_amount(LiquidCrystal_I2C &lcd, int amount_players)
 {
   int spies = 1;
   lcd.clear();
@@ -92,7 +93,7 @@ int select_spy_amount(LiquidCrystal_I2C& lcd, int amount_players)
     lcd.print(spies);
     state = read_pins();
     while (!state)
-      state = read_pins();    
+      state = read_pins();
     if (state)
     {
       if ((2 & state) && (spies < amount_players))
@@ -140,12 +141,12 @@ bool *set_spy(int amount_players, int amount_spies)
     int pos = random(1, amount_players + 1);
     if (!roles[pos])
       roles[pos] = true;
-      i++;    
-  }  
+    i++;
+  }
   return roles;
 }
 
-void print_tag(LiquidCrystal_I2C& lcd, int position)
+void print_tag(LiquidCrystal_I2C &lcd, int position)
 {
   lcd.clear();
   lcd.setCursor(0, 0);
@@ -155,7 +156,7 @@ void print_tag(LiquidCrystal_I2C& lcd, int position)
   lcd.setCursor(0, 1);
 }
 
-void print_role(LiquidCrystal_I2C& lcd, bool role, String palabra)
+void print_role(LiquidCrystal_I2C &lcd, bool role, String palabra)
 {
   if (role)
     lcd.print("Espia");
@@ -164,7 +165,7 @@ void print_role(LiquidCrystal_I2C& lcd, bool role, String palabra)
 }
 
 // displays roles of current round
-void display_roles(LiquidCrystal_I2C& lcd, bool *roles, int amount_players, String text)
+void display_roles(LiquidCrystal_I2C &lcd, bool *roles, int amount_players, String text)
 {
   int i = 0;
   unsigned int state;
@@ -207,7 +208,7 @@ void display_roles(LiquidCrystal_I2C& lcd, bool *roles, int amount_players, Stri
 }
 
 // displays the end screen for a round
-void end_screen(LiquidCrystal_I2C& lcd)
+void end_screen(LiquidCrystal_I2C &lcd)
 {
   delay(BUTTON_DELAY);
   lcd.clear();
@@ -224,7 +225,7 @@ void end_screen(LiquidCrystal_I2C& lcd)
 }
 
 // plays an entire game of the spy
-int spy_game(LiquidCrystal_I2C& lcd)
+int spy_game(LiquidCrystal_I2C &lcd)
 {
   lcd.init();
   lcd.backlight();

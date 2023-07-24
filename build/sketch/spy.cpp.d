@@ -1,6 +1,6 @@
-/home/taci/repos/arduino-for-fun/game-station/build/sketch/spy.cpp.o: \
- /home/taci/repos/arduino-for-fun/game-station/build/sketch/spy.cpp \
- /home/taci/repos/arduino-for-fun/game-station/build/sketch/spy.h \
+/home/taci/repos/game-station/build/sketch/spy.cpp.o: \
+ /home/taci/repos/game-station/build/sketch/spy.cpp \
+ /home/taci/repos/game-station/build/sketch/spy.h \
  /home/taci/Arduino/libraries/LiquidCrystal_I2C/LiquidCrystal_I2C.h \
  /home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino/Print.h \
  /home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino/WString.h \
@@ -24,5 +24,5 @@
  /home/taci/Arduino/libraries/SD/src/utility/FatStructs.h \
  /home/taci/Arduino/libraries/SD/src/utility/SdFatUtil.h \
  /home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/SPI/src/SPI.h \
- /home/taci/repos/arduino-for-fun/game-station/build/sketch/file-managing.h \
- /home/taci/repos/arduino-for-fun/game-station/build/sketch/clist.h
+ /home/taci/repos/game-station/build/sketch/file-managing.h \
+ /home/taci/repos/game-station/build/sketch/clist.h
