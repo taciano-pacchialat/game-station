@@ -137,7 +137,7 @@ bool *set_spy(int amount_players, int amount_spies)
   while (i < amount_spies)
   {
     randomSeed(analogRead(0));
-    int pos = random(0, amount_players + 1);
+    int pos = random(1, amount_players + 1);
     if (!roles[pos])
       roles[pos] = true;
       i++;    
