@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*
+    This c program will be used for filtering the words in each .txt file by pasting
+    the data into another .txt, but avoiding repetitions so that each word has the
+    same probability of being selected.
+
+    Written by Farmen.
+ */
+
 typedef struct n
 {
     char dato[200];
@@ -15,6 +23,7 @@ void mostrarLista(nodo *);
 void leerSinRepetir(nodo **, const char *);
 int estaEnLaLista(char *, nodo *);
 void escribirEnArchivo(nodo *, const char *);
+void liberarLista(nodo **);
 
 int main()
 {
@@ -22,7 +31,6 @@ int main()
     inicializar(&lista);
     leerSinRepetir(&lista, "nouns.txt");
     escribirEnArchivo(lista, "unrepeated-nouns.txt");
-
     liberarLista(&lista);
     return 0;
 }
@@ -76,7 +84,7 @@ int estaEnLaLista(char *palabra, nodo *lista)
 
 void leerSinRepetir(nodo **lista, const char *path)
 {
-    FILE *f = fopen("path", "r");
+    FILE *f = fopen(path, "r");
     if (f == NULL)
     {
         printf("No se pudo abrir el archivo.\n");
@@ -89,7 +97,7 @@ void leerSinRepetir(nodo **lista, const char *path)
         if (!estaEnLaLista(palabra, *lista))
         {
             agregarAtras(palabra, lista);
-            printf("%s\n", palabra);
+            // printf("%s\n", palabra);
         }
     }
     fclose(f);
