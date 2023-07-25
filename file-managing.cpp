@@ -1,23 +1,25 @@
 #include "file-managing.h"
 
 // initializes a file called "name"
-void initialize_file(File& file, const String name)
+void initialize_file(File &file, const String name)
 {
   if (!SD.begin(CS_PIN))
   {
     Serial.print("Failed initializing SD card\n");
-    while (1);
+    while (1)
+      ;
   }
   file = SD.open(name, FILE_READ);
   if (!file)
   {
-    Serial.print("File opening failed!\n"); 
-    while (1);
+    Serial.print("File opening failed!\n");
+    while (1)
+      ;
   }
 }
 
 // returns a random word from the file
-String random_word(File& file, node **words_used)
+String random_word(File &file, node **words_used)
 {
   if (file)
   {
@@ -39,5 +41,3 @@ String random_word(File& file, node **words_used)
     Serial.println("File reading failed");
   file.close();
 }
-
-

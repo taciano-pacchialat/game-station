@@ -1,4 +1,7 @@
 #line 1 "/home/taci/repos/game-station/.vscode/settings.json"
 {
-  "C_Cpp.errorSquiggles": "enabled"
+  "C_Cpp.errorSquiggles": "enabled",
+  "arduino.enableUSBDetection": false,
+  "arduino.path": "",
+  "arduino.useArduinoCli": true
 }

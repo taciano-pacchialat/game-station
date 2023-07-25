@@ -1,23 +1,19 @@
 #include <Arduino.h>
 #line 1 "/home/taci/repos/game-station/game-station.ino"
 #include "spy.h"
+#include "charades.h"
 #include "file-managing.h"
 
 #define CHARADES 1
 #define SPY 0
 
-#line 7 "/home/taci/repos/game-station/game-station.ino"
-int start_menu(LiquidCrystal_l2C &lcd);
-#line 12 "/home/taci/repos/game-station/game-station.ino"
-void setup();
-#line 24 "/home/taci/repos/game-station/game-station.ino"
-void loop();
-#line 7 "/home/taci/repos/game-station/game-station.ino"
-int start_menu(LiquidCrystal_l2C &lcd)
-{
-  lcd.backlight();
-}
+int start_menu(LiquidCrystal_I2C &lcd);
 
+#line 10 "/home/taci/repos/game-station/game-station.ino"
+void setup();
+#line 26 "/home/taci/repos/game-station/game-station.ino"
+void loop();
+#line 10 "/home/taci/repos/game-station/game-station.ino"
 void setup()
 {
   Serial.begin(115200);
@@ -28,9 +24,33 @@ void setup()
   pinMode(BUTTON3, INPUT);
   pinMode(BUTTON4, INPUT);
   int game = start_menu(lcd);
+  if (game == CHARADES)
+    charades_game(lcd);
+  else
+    spy_game(lcd);
 }
 
 void loop()
 {
 }
 
+int start_menu(LiquidCrystal_I2C &lcd)
+{
+  lcd.backlight();
+  lcd.setCursor(0, 0);
+  lcd.print("<- Espia");
+  lcd.setCursor(0, 1);
+  lcd.print("-> Digalo ...");
+  unsigned int state = 0;
+  while (1)
+  {
+    state = read_pins();
+    if (state)
+    {
+      if (8 & state)
+        return CHARADES;
+      else if (4 & state)
+        return SPY;
+    }
+  }
+}

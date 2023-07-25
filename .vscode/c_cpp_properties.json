@@ -7,7 +7,8 @@
             "compilerArgs": [],
             "intelliSenseMode": "linux-clang-x64",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/libraries"
             ],
             "forcedInclude": [],
             "cStandard": "c17",

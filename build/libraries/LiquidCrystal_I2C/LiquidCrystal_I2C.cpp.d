@@ -1,6 +1,5 @@
-/home/taci/repos/game-station/build/sketch/charades.cpp.o: \
- /home/taci/repos/game-station/build/sketch/charades.cpp \
- /home/taci/repos/game-station/build/sketch/charades.h \
+/home/taci/repos/game-station/build/libraries/LiquidCrystal_I2C/LiquidCrystal_I2C.cpp.o: \
+ /home/taci/Arduino/libraries/LiquidCrystal_I2C/LiquidCrystal_I2C.cpp \
  /home/taci/Arduino/libraries/LiquidCrystal_I2C/LiquidCrystal_I2C.h \
  /home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino/Print.h \
  /home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino/WString.h \
@@ -15,15 +14,4 @@
  /home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino/Stream.h \
  /home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino/USBAPI.h \
  /home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino/Arduino.h \
- /home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/variants/standard/pins_arduino.h \
- /home/taci/repos/game-station/build/sketch/spy.h \
- /home/taci/Arduino/libraries/SD/src/SD.h \
- /home/taci/Arduino/libraries/SD/src/utility/SdFat.h \
- /home/taci/Arduino/libraries/SD/src/utility/Sd2Card.h \
- /home/taci/Arduino/libraries/SD/src/utility/Sd2PinMap.h \
- /home/taci/Arduino/libraries/SD/src/utility/SdInfo.h \
- /home/taci/Arduino/libraries/SD/src/utility/FatStructs.h \
- /home/taci/Arduino/libraries/SD/src/utility/SdFatUtil.h \
- /home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/SPI/src/SPI.h \
- /home/taci/repos/game-station/build/sketch/file-managing.h \
- /home/taci/repos/game-station/build/sketch/clist.h
+ /home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/variants/standard/pins_arduino.h

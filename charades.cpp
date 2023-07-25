@@ -49,12 +49,16 @@ void player_prepare(LiquidCrystal_I2C &lcd)
   }
 }
 
-int play_round(int seconds)
+int play_round(unsigned long time)
 {
   String current_word;
   unsigned int points = 0;
+  time *= 1000; // convert from seconds to milliseconds
   unsigned long start_time = millis();
-  // continue
+  while (millis() - start_time <= time)
+  {
+    randomSeed(analogRead(0));
+    }
 }
 
 // plays an entire game of charades
