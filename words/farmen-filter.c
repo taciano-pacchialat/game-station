@@ -29,8 +29,8 @@ int main()
 {
     nodo *lista;
     inicializar(&lista);
-    leerSinRepetir(&lista, "nouns.txt");
-    escribirEnArchivo(lista, "unrepeated-nouns.txt");
+    leerSinRepetir(&lista, "verbs.txt");
+    escribirEnArchivo(lista, "unrepeated-verbs.txt");
     liberarLista(&lista);
     return 0;
 }
