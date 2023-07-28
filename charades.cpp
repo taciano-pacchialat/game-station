@@ -28,6 +28,7 @@ unsigned long set_round_duration(LiquidCrystal_I2C &lcd)
   }
 }
 
+// displays a menu before beginning the round.
 void player_prepare(LiquidCrystal_I2C &lcd)
 {
   lcd.clear();
@@ -49,6 +50,7 @@ void player_prepare(LiquidCrystal_I2C &lcd)
   }
 }
 
+// chooses a random word of either verbs or nouns.
 String choose_word(LiquidCrystal_I2C &lcd, File &nouns, File &verbs, node **words_used)
 {
   randomSeed(analogRead(0));
@@ -58,6 +60,7 @@ String choose_word(LiquidCrystal_I2C &lcd, File &nouns, File &verbs, node **word
     return random_word(verbs, MAX_VERBS, words_used);
 }
 
+// checks if the user skipped or guessed.
 int check_answer()
 {
   unsigned int state = 0;
@@ -120,7 +123,10 @@ void print_points(LiquidCrystal_I2C &lcd, int &points)
     while (!state)
       state = read_pins();
     if (4 & state)
+    {
+      delay(BUTTON_DELAY);
       return;
+    }
   }
 }
 
@@ -137,9 +143,15 @@ int another_round(LiquidCrystal_I2C &lcd)
     while (!state)
       state = read_pins();
     if (4 & state)
+    {
+      delay(BUTTON_DELAY);
       return 1;
+    }
     else if (8 & state)
+    {
+      delay(BUTTON_DELAY);
       return 0;
+    }
   }
 }
 
