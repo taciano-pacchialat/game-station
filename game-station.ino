@@ -16,11 +16,15 @@ void setup()
   pinMode(BUTTON2, INPUT);
   pinMode(BUTTON3, INPUT);
   pinMode(BUTTON4, INPUT);
-  int game = start_menu(lcd);
-  if (game == CHARADES)
-    charades_game(lcd);
-  else
-    spy_game(lcd);
+  int game;
+  while (1)
+  {
+    game = start_menu(lcd);
+    if (game == CHARADES)
+      charades_game(lcd);
+    else
+      spy_game(lcd);
+  }
 }
 
 void loop()
