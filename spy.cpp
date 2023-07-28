@@ -215,7 +215,7 @@ int spy_game(LiquidCrystal_I2C &lcd)
   while (1)
   {
     bool *roles = set_spy(amount_players, amount_spies);
-    String text = random_word(nouns, &words_used);
+    String text = random_word(nouns, MAX_NOUNS, &words_used);
     display_roles(lcd, roles, amount_players, text);
     end_screen(lcd);
   }

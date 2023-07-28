@@ -50,16 +50,28 @@ void player_prepare(LiquidCrystal_I2C &lcd)
   }
 }
 
-int play_round(unsigned long time)
+int play_round(LiquidCrystal_I2C &lcd, unsigned long time, File &nouns, File &verbs)
 {
   String current_word;
   unsigned int points = 0;
   time *= 1000; // convert from seconds to milliseconds
+  lcd.clear();
+  lcd.backlight();
+  node *words_used = NULL;
+  lcd.setCursor(0, 0);
+  lcd.print("Palabra:");
+  lcd.setCursor(0, 1);
   unsigned long start_time = millis();
   while (millis() - start_time <= time)
   {
     randomSeed(analogRead(0));
-    }
+    int which_file = random(1, 500);
+    if (which_file % 2)
+      current_word = random_word(nouns, MAX_NOUNS, &words_used);
+    else
+      current_word = random_word(verbs, MAX_VERBS, &words_used);
+    // continue
+  }
 }
 
 // plays an entire game of charades

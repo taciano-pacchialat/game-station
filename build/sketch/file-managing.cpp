@@ -19,8 +19,9 @@ void initialize_file(File &file, const String name)
   }
 }
 
-// returns a random word from the file
-String random_word(File &file, node **words_used)
+// Returns a random word from the file which is not present on the list, and adds it
+// at the end.
+String random_word(File &file, int lines, node **words_used)
 {
   if (file)
   {
@@ -28,7 +29,7 @@ String random_word(File &file, node **words_used)
     while (1)
     {
       randomSeed(analogRead(0));
-      int i = random(1, WORDS_IN_FILE + 1);
+      int i = random(1, lines + 1);
       for (int j = 0; j < i; j++)
         text = file.readStringUntil('\n');
       if (!is_included(*words_used, text.c_str()))
