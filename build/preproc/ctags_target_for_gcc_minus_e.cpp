@@ -6,27 +6,6 @@
 
 
 
-int start_menu(LiquidCrystal_I2C &lcd);
-
-void setup()
-{
-  Serial.begin(115200);
-  LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
-  pinMode(10, 0x1);
-  pinMode(7, 0x0);
-  pinMode(6, 0x0);
-  pinMode(5, 0x0);
-  pinMode(4, 0x0);
-  int game = start_menu(lcd);
-  if (game == 1)
-    charades_game(lcd);
-  else
-    spy_game(lcd);
-}
-
-void loop()
-{
-}
 
 int start_menu(LiquidCrystal_I2C &lcd)
 {
@@ -47,4 +26,29 @@ int start_menu(LiquidCrystal_I2C &lcd)
         return 0;
     }
   }
+}
+
+void setup()
+{
+  Serial.begin(115200);
+  LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
+  pinMode(10, 0x1);
+  pinMode(7, 0x0);
+  pinMode(6, 0x0);
+  pinMode(5, 0x0);
+  pinMode(4, 0x0);
+  start_menu(lcd);
+  int game;
+  while (1)
+  {
+    game = start_menu(lcd);
+    if (game == 1)
+      charades_game(lcd);
+    else
+      spy_game(lcd);
+  }
+}
+
+void loop()
+{
 }

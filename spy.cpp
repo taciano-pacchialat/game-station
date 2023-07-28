@@ -1,7 +1,5 @@
 #include "spy.h"
 
-#define LCDPROP 0x27, 16, 2
-
 // returns a binary with the states of the bits
 // if the the button is activated, the position = 1
 unsigned int read_pins()
@@ -209,7 +207,7 @@ int spy_game(LiquidCrystal_I2C &lcd)
   String current_word;
   unsigned int state;
   File nouns;
-  initialize_file(nouns, "nouns.txt");
+  initialize_file(nouns, "unrepeated-nouns.txt");
   int amount_players = select_players_amount(lcd);
   int amount_spies = select_spy_amount(lcd, amount_players);
   while (1)

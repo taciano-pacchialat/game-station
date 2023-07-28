@@ -1,8 +1,6 @@
 #line 1 "/home/taci/repos/game-station/spy.cpp"
 #include "spy.h"
 
-#define LCDPROP 0x27, 16, 2
-
 // returns a binary with the states of the bits
 // if the the button is activated, the position = 1
 unsigned int read_pins()
@@ -216,7 +214,7 @@ int spy_game(LiquidCrystal_I2C &lcd)
   while (1)
   {
     bool *roles = set_spy(amount_players, amount_spies);
-    String text = random_word(nouns, &words_used);
+    String text = random_word(nouns, MAX_NOUNS, &words_used);
     display_roles(lcd, roles, amount_players, text);
     end_screen(lcd);
   }

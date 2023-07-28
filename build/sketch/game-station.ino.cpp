@@ -6,34 +6,15 @@
 
 #define CHARADES 1
 #define SPY 0
+#define LCDPROP 0x27, 16, 2
 
+#line 9 "/home/taci/repos/game-station/game-station.ino"
 int start_menu(LiquidCrystal_I2C &lcd);
-
-#line 10 "/home/taci/repos/game-station/game-station.ino"
+#line 30 "/home/taci/repos/game-station/game-station.ino"
 void setup();
-#line 26 "/home/taci/repos/game-station/game-station.ino"
+#line 51 "/home/taci/repos/game-station/game-station.ino"
 void loop();
-#line 10 "/home/taci/repos/game-station/game-station.ino"
-void setup()
-{
-  Serial.begin(115200);
-  LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
-  pinMode(CS_PIN, OUTPUT);
-  pinMode(BUTTON1, INPUT);
-  pinMode(BUTTON2, INPUT);
-  pinMode(BUTTON3, INPUT);
-  pinMode(BUTTON4, INPUT);
-  int game = start_menu(lcd);
-  if (game == CHARADES)
-    charades_game(lcd);
-  else
-    spy_game(lcd);
-}
-
-void loop()
-{
-}
-
+#line 9 "/home/taci/repos/game-station/game-station.ino"
 int start_menu(LiquidCrystal_I2C &lcd)
 {
   lcd.backlight();
@@ -53,4 +34,29 @@ int start_menu(LiquidCrystal_I2C &lcd)
         return SPY;
     }
   }
+}
+
+void setup()
+{
+  Serial.begin(115200);
+  LiquidCrystal_I2C lcd = LiquidCrystal_I2C(LCDPROP);
+  pinMode(CS_PIN, OUTPUT);
+  pinMode(BUTTON1, INPUT);
+  pinMode(BUTTON2, INPUT);
+  pinMode(BUTTON3, INPUT);
+  pinMode(BUTTON4, INPUT);
+  start_menu(lcd);
+  int game;
+  while (1)
+  {
+    game = start_menu(lcd);
+    if (game == CHARADES)
+      charades_game(lcd);
+    else
+      spy_game(lcd);
+  }
+}
+
+void loop()
+{
 }
