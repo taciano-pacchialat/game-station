@@ -68,17 +68,14 @@ int select_spy_amount(LiquidCrystal_I2C &lcd, int amount_players)
     state = read_pins();
     while (!state)
       state = read_pins();
-    if (state)
+    if ((2 & state) && (spies < amount_players))
+      spies += 1;
+    else if ((1 & state) && (spies > 1))
+      spies -= 1;
+    else if (4 & state)
     {
-      if ((2 & state) && (spies < amount_players))
-        spies += 1;
-      else if ((1 & state) && (spies > 1))
-        spies -= 1;
-      else if (4 & state)
-      {
-        delay(BUTTON_DELAY);
-        return spies;
-      }
+      delay(BUTTON_DELAY);
+      return spies;
     }
     delay(BUTTON_DELAY);
   }
@@ -111,7 +108,6 @@ bool *set_spy(int amount_players, int amount_spies)
   i = 0;
   while (i < amount_spies)
   {
-    randomSeed(analogRead(0));
     int pos = random(1, amount_players + 1);
     if (!roles[pos])
       roles[pos] = true;
@@ -207,7 +203,7 @@ int spy_game(LiquidCrystal_I2C &lcd)
   String current_word;
   unsigned int state;
   File nouns;
-  initialize_file(nouns, "unrepeated-nouns.txt");
+  initialize_file(nouns, "nouns.txt");
   int amount_players = select_players_amount(lcd);
   int amount_spies = select_spy_amount(lcd, amount_players);
   while (1)
@@ -215,7 +211,8 @@ int spy_game(LiquidCrystal_I2C &lcd)
     bool *roles = set_spy(amount_players, amount_spies);
     String text = random_word(nouns, MAX_NOUNS, &words_used);
     display_roles(lcd, roles, amount_players, text);
-    end_screen(lcd);
   }
+  nouns.close();
+  delete_list(&words_used);
   return 0;
 }

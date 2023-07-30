@@ -43,6 +43,7 @@ void setup()
   while (1)
   {
     game = start_menu(lcd);
+    randomSeed(millis());
     if (game == CHARADES)
       charades_game(lcd);
     else

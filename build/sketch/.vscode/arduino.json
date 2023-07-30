@@ -2,7 +2,7 @@
 {
     "board": "arduino:avr:uno",
     "sketch": "game-station.ino",
-    "output": "./build",
     "port": "/dev/ttyACM0",
+    "output": "./build",
     "programmer": "avrisp"
 }

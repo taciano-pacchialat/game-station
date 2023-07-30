@@ -8,14 +8,14 @@ char *linked list library.
 // initializes the list
 void initialize_list(node **list)
 {
-  *list = NULL;
+  *list = 0;
 }
 
 // adds a node to the beginning of the list
 void add_first(node **list, const char *data)
 {
   node *new_node = (node *)malloc(sizeof(node));
-  if (new_node != NULL)
+  if (new_node != 0)
   {
     new_node->next = *list;
     new_node->data = strdup(data); // Duplicate the input string to store in the node
@@ -26,31 +26,31 @@ void add_first(node **list, const char *data)
 // prints the list
 void print_list(node *list)
 {
-  while (list != NULL)
+  while (list != 0)
   {
     printf("%s -> ", list->data);
     list = list->next;
   }
-  printf("NULL\n");
+  printf("0\n");
 }
 
 // adds a node to the end of the list
 void add_last(node **list, const char *data)
 {
-  if (*list == NULL)
+  if (*list == 0)
     add_first(list, data);
   else
   {
     node *aux = *list;
-    while (aux->next != NULL)
+    while (aux->next != 0)
       aux = aux->next;
     node *new_node = (node *)malloc(sizeof(node));
-    if (new_node == NULL)
+    if (new_node == 0)
     {
       perror("Memory allocation error");
       exit(EXIT_FAILURE);
     }
-    new_node->next = NULL;
+    new_node->next = 0;
     new_node->data = strdup(data); // Duplicate the input string to store in the node
     aux->next = new_node;
   }
@@ -60,7 +60,7 @@ void add_last(node **list, const char *data)
 int list_size(node *list)
 {
   int size = 0;
-  while (list != NULL)
+  while (list != 0)
   {
     list = list->next;
     size++;
@@ -71,7 +71,7 @@ int list_size(node *list)
 // deletes the list from the heap
 void delete_list(node **list)
 {
-  while (*list != NULL)
+  while (*list != 0)
   {
     node *aux = *list;
     *list = (*list)->next;
@@ -84,7 +84,7 @@ void delete_list(node **list)
 // 1 if it is
 int is_included(node *list, const char *data)
 {
-  while (list != NULL)
+  while (list != 0)
   {
     if (strcmp(list->data, data) == 0)
       return 1;

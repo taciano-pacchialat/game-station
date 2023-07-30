@@ -15,7 +15,7 @@
 #define BUTTON3 5
 #define BUTTON4 4
 #define BUTTON_DELAY 500
-#define MAX_NOUNS 1405
+#define MAX_NOUNS 1404
 
 int spy_game(LiquidCrystal_I2C &lcd);
 unsigned int read_pins();

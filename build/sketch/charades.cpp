@@ -7,19 +7,21 @@ unsigned long set_round_duration(LiquidCrystal_I2C &lcd)
   lcd.clear();
   lcd.backlight();
   unsigned long seconds = 0;
-  lcd.setCursor(0, 0);
-  lcd.print("Tiempo:");
-  lcd.setCursor(13, 0);
   unsigned int state = 0;
   while (1)
   {
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Tiempo:");
+    lcd.setCursor(13, 0);
     lcd.print(seconds);
+    state = read_pins();
     while (!state)
       state = read_pins();
-    if ((1 & state) && (seconds > 5))
-      seconds -= 5;
-    else if ((2 & state) && (seconds < 994))
-      seconds += 5;
+    if ((1 & state) && (seconds > 10))
+      seconds -= 10;
+    else if ((2 & state) && (seconds < 989))
+      seconds += 10;
     else if (4 & state)
     {
       delay(BUTTON_DELAY);
@@ -54,27 +56,33 @@ void player_prepare(LiquidCrystal_I2C &lcd)
 // chooses a random word of either verbs or nouns.
 String choose_word(LiquidCrystal_I2C &lcd, File &nouns, File &verbs, node **words_used)
 {
-  randomSeed(analogRead(0));
   if (random(1, 500) % 2)
+  {
+    Serial.println("file selected: nouns"); // DEBUG
     return random_word(nouns, MAX_NOUNS, words_used);
+  }
   else
+  {
+    Serial.println("file selected: verbs"); // DEBUG
     return random_word(verbs, MAX_VERBS, words_used);
+  }
 }
 
 // checks if the user skipped or guessed.
 int check_answer()
 {
-  unsigned int state = 0;
+  unsigned int state;
   while (1)
   {
+    state = read_pins();
     while (!state)
       state = read_pins();
-    if (4 & state)
+    if (2 & state)
     {
       delay(BUTTON_DELAY);
       return 1;
     }
-    else if (8 & state)
+    else if (1 & state)
     {
       delay(BUTTON_DELAY);
       return 0;
@@ -93,17 +101,27 @@ int play_round(LiquidCrystal_I2C &lcd, unsigned long time, File &nouns, File &ve
   lcd.backlight();
   node *words_used = NULL;             // initialize list
   unsigned long start_time = millis(); // set the starting time of the round
+
+  int difference; // DEBUG
+
   while (millis() - start_time <= time)
   {
+    // DEBUG
+    difference = millis() - start_time;
+    Serial.print("difference: ");
+    Serial.println(difference);
+
     lcd.backlight();
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Palabra:");
     lcd.setCursor(0, 1);
     current_word = choose_word(lcd, nouns, verbs, &words_used);
+    Serial.println(current_word);
     lcd.print(current_word);
     points += check_answer();
   }
+  delete_list(&words_used);
   return points;
 }
 
@@ -160,11 +178,12 @@ int another_round(LiquidCrystal_I2C &lcd)
 void charades_game(LiquidCrystal_I2C &lcd)
 {
   File nouns;
-  initialize_file(nouns, "unrepeated-nouns.txt");
+  initialize_file(nouns, "nouns.txt");
   File verbs;
-  initialize_file(verbs, "unrepeated-verbs.txt");
+  initialize_file(verbs, "verbs.txt");
   int points;
   unsigned long time = set_round_duration(lcd);
+  player_prepare(lcd);
   while (1)
   {
     points = play_round(lcd, time, nouns, verbs);
@@ -174,4 +193,6 @@ void charades_game(LiquidCrystal_I2C &lcd)
     else
       break;
   }
+  nouns.close();
+  verbs.close();
 }

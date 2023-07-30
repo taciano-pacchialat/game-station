@@ -10,8 +10,8 @@
 #include <Arduino.h>
 #include "spy.h"
 
-#define MAX_VERBS 1163
-#define MAX_NOUNS 1405
+#define MAX_VERBS 1162
+#define MAX_NOUNS 1404
 
 void charades_game(LiquidCrystal_I2C &lcd);
 unsigned long set_round_duration(LiquidCrystal_I2C &lcd);
