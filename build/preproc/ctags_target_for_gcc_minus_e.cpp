@@ -22,9 +22,15 @@ int start_menu(LiquidCrystal_I2C &lcd)
     if (state)
     {
       if (8 & state)
+      {
+        delay(500);
         return 0;
+      }
       else if (4 & state)
+      {
+        delay(500);
         return 1;
+      }
     }
   }
 }
@@ -41,15 +47,23 @@ void setup()
   pinMode(5, 0x0);
   pinMode(4, 0x0);
   int game;
+  File nouns;
+  initialize_file(nouns, "nouns.txt");
+  File verbs;
+  initialize_file(verbs, "verbs.txt");
   while (1)
   {
     game = start_menu(lcd);
     randomSeed(millis());
     if (game == 1)
-      charades_game(lcd);
+      charades_game(lcd, nouns, verbs);
     else
-      spy_game(lcd);
+      spy_game(lcd, nouns);
+    lcd.clear();
+    lcd.backlight();
   }
+  nouns.close();
+  verbs.close();
 }
 
 void loop()

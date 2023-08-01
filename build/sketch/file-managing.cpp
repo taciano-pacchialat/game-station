@@ -36,8 +36,10 @@ String random_word(File &file, int lines, node **words_used)
         text = file.readStringUntil('\n');
       if (!is_included(*words_used, text.c_str()))
       {
-        Serial.println("Es con add first"); // DEBUG
         add_first(words_used, text.c_str());
+        file.seek(0);
+        Serial.print("Word chosen: "); // DEBUG
+        Serial.println(text);          // DEBUG
         return text;
       }
     }

@@ -21,9 +21,15 @@ int start_menu(LiquidCrystal_I2C &lcd)
     if (state)
     {
       if (8 & state)
+      {
+        delay(BUTTON_DELAY);
         return SPY;
+      }
       else if (4 & state)
+      {
+        delay(BUTTON_DELAY);
         return CHARADES;
+      }
     }
   }
 }
@@ -40,15 +46,23 @@ void setup()
   pinMode(BUTTON3, INPUT);
   pinMode(BUTTON4, INPUT);
   int game;
+  File nouns;
+  initialize_file(nouns, "nouns.txt");
+  File verbs;
+  initialize_file(verbs, "verbs.txt");
   while (1)
   {
     game = start_menu(lcd);
     randomSeed(millis());
     if (game == CHARADES)
-      charades_game(lcd);
+      charades_game(lcd, nouns, verbs);
     else
-      spy_game(lcd);
+      spy_game(lcd, nouns);
+    lcd.clear();
+    lcd.backlight();
   }
+  nouns.close();
+  verbs.close();
 }
 
 void loop()

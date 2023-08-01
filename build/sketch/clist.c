@@ -84,7 +84,7 @@ void delete_list(node **list)
 // 1 if it is
 int is_included(node *list, const char *data)
 {
-  while (list != 0)
+  while (list->next != 0)
   {
     if (strcmp(list->data, data) == 0)
       return 1;

@@ -12,6 +12,6 @@
 #define MAX_VERBS 1162
 #define MAX_NOUNS 1404
 
-void charades_game(LiquidCrystal_I2C &lcd);
+void charades_game(LiquidCrystal_I2C &lcd, File &nouns, File &verbs);
 unsigned long set_round_duration(LiquidCrystal_I2C &lcd);
 #endif

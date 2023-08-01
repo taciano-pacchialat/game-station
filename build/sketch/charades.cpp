@@ -175,12 +175,8 @@ int another_round(LiquidCrystal_I2C &lcd)
 }
 
 // plays an entire game of charades
-void charades_game(LiquidCrystal_I2C &lcd)
+void charades_game(LiquidCrystal_I2C &lcd, File &nouns, File &verbs)
 {
-  File nouns;
-  initialize_file(nouns, "nouns.txt");
-  File verbs;
-  initialize_file(verbs, "verbs.txt");
   int points;
   unsigned long time = set_round_duration(lcd);
   player_prepare(lcd);
@@ -193,6 +189,4 @@ void charades_game(LiquidCrystal_I2C &lcd)
     else
       break;
   }
-  nouns.close();
-  verbs.close();
 }
