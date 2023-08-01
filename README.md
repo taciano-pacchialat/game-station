@@ -1,8 +1,8 @@
 # game-station
 
-mini console to play charades and spy, coded in Arduino, C, and C++.
-
 ## What's this?
+
+Mini console to play charades and spy, coded in Arduino, C, and C++.
 
 The game station project came to light when me and my friends noticed apps for playing the spy game or charades aren't as good as we expected them to be.
 That's why I decided to code my own mini console which would be a hundred times better than those apps. I don't know if it's that good, but I came up with a
