@@ -29,14 +29,14 @@ String random_word(File &file, int lines, node **words_used)
     while (1)
     {
       int i = random(1, lines + 1);
-      Serial.print("i = ");
-      Serial.println(i);
+      Serial.print("i = "); // DEBUG
+      Serial.println(i);    // DEBUG
       for (int j = 0; j < i; j++)
         text = file.readStringUntil('\n');
+      file.seek(0);
       if (!is_included(*words_used, text.c_str()))
       {
         add_first(words_used, text.c_str());
-        file.seek(0);
         Serial.print("Word chosen: "); // DEBUG
         Serial.println(text);          // DEBUG
         return text;

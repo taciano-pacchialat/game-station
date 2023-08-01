@@ -101,6 +101,7 @@ void print_bool_array(bool *arg, int dim)
 // a player. True if spy, false if not
 bool *set_spy(int amount_players, int amount_spies)
 {
+  randomSeed(millis());
   bool *roles = (bool *)malloc(amount_players * (sizeof(bool)));
   int i;
   for (i = 0; i < amount_players; i++)
@@ -108,10 +109,12 @@ bool *set_spy(int amount_players, int amount_spies)
   i = 0;
   while (i < amount_spies)
   {
-    int pos = random(1, amount_players + 1);
+    int pos = random(0, amount_players);
     if (!roles[pos])
+    {
       roles[pos] = true;
-    i++;
+      i++;
+    }
   }
   return roles;
 }
@@ -188,7 +191,7 @@ int end_screen(LiquidCrystal_I2C &lcd)
   state = read_pins();
   while (1)
   {
-    while (state)
+    while (!state)
       state = read_pins();
     if (state & 8)
     {
@@ -201,7 +204,6 @@ int end_screen(LiquidCrystal_I2C &lcd)
       return 1;
     }
   }
-  lcd.clear();
 }
 
 // plays an entire game of the spy
@@ -216,6 +218,8 @@ int spy_game(LiquidCrystal_I2C &lcd, File &nouns)
   int amount_spies = select_spy_amount(lcd, amount_players);
   while (1)
   {
+    lcd.clear();
+    lcd.backlight();
     bool *roles = set_spy(amount_players, amount_spies);
     String text = random_word(nouns, MAX_NOUNS, &words_used);
     display_roles(lcd, roles, amount_players, text);
