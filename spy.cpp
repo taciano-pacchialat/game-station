@@ -1,7 +1,5 @@
 #include "spy.h"
 
-// returns a binary with the states of the bits
-// if the the button is activated, the position = 1
 unsigned int read_pins()
 {
   unsigned int state = 0;
@@ -206,7 +204,6 @@ int end_screen(LiquidCrystal_I2C &lcd)
   }
 }
 
-// plays an entire game of the spy
 int spy_game(LiquidCrystal_I2C &lcd, File &nouns)
 {
   lcd.init();

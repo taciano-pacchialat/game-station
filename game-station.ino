@@ -7,6 +7,7 @@
 #define SPY 0
 #define LCDPROP 0x27, 16, 2
 
+// function for choosing between charades or spy game
 int start_menu(LiquidCrystal_I2C &lcd)
 {
   lcd.backlight();
