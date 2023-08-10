@@ -11,7 +11,7 @@ pretty decent result.
 ## Circuit
 
 The circuit looks like this<br>
-<img src="./images/game-station-circuit.jpeg" alt="game station circuit image" style="width: 50%;">
+<img src="./images/game-station-circuit.jpeg" alt="game station circuit image" style="width: 50%;"><br>
 This is what you need: a couple of resistors, an I2c LCD display, four buttons and a micro SD card with its micro SD card reader module.
 For the code to work its important that you copy the "unrepeated-nouns.txt" and "unrepeated-verbs.txt" to the SD and rename them as
 "nouns.txt" and "verbs.txt" respectively.
