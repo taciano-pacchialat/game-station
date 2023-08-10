@@ -14,7 +14,7 @@ int start_menu(LiquidCrystal_I2C &lcd)
   lcd.setCursor(0, 0);
   lcd.print("<- Espia");
   lcd.setCursor(0, 1);
-  lcd.print("-> Digalo ...");
+  lcd.print("-> Digalo");
   unsigned int state = 0;
   while (1)
   {

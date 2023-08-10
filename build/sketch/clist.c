@@ -1,17 +1,11 @@
 #line 1 "/home/taci/repos/game-station/clist.c"
 #include "./clist.h"
 
-/*
-char *linked list library.
-*/
-
-// initializes the list
 void initialize_list(node **list)
 {
   *list = 0;
 }
 
-// adds a node to the beginning of the list
 void add_first(node **list, const char *data)
 {
   node *new_node = (node *)malloc(sizeof(node));
@@ -23,7 +17,6 @@ void add_first(node **list, const char *data)
   }
 }
 
-// prints the list
 void print_list(node *list)
 {
   while (list != 0)
@@ -34,7 +27,6 @@ void print_list(node *list)
   printf("0\n");
 }
 
-// adds a node to the end of the list
 void add_last(node **list, const char *data)
 {
   if (*list == 0)
@@ -56,7 +48,6 @@ void add_last(node **list, const char *data)
   }
 }
 
-// returns the amount of nodes contained in the list
 int list_size(node *list)
 {
   int size = 0;
@@ -68,7 +59,6 @@ int list_size(node *list)
   return size;
 }
 
-// deletes the list from the heap
 void delete_list(node **list)
 {
   while (*list != 0)
@@ -80,8 +70,6 @@ void delete_list(node **list)
   }
 }
 
-// 0 if the data is not included
-// 1 if it is
 int is_included(node *list, const char *data)
 {
   while (list->next != 0)

@@ -1,7 +1,6 @@
 #line 1 "/home/taci/repos/game-station/file-managing.cpp"
 #include "file-managing.h"
 
-// initializes a file called "name"
 void initialize_file(File &file, const String &name)
 {
   if (!SD.begin(CS_PIN))
@@ -20,8 +19,6 @@ void initialize_file(File &file, const String &name)
   }
 }
 
-// Returns a random word from the file which is not present on the list, and adds it
-// at the end.
 String random_word(File &file, int lines, node **words_used)
 {
   if (file)

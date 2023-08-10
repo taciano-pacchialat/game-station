@@ -2,20 +2,17 @@
  {
   "directory": "/home/taci/repos/game-station",
   "arguments": [
-   "/home/taci/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++",
+   "/home/taci/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-gcc",
    "-c",
    "-g",
    "-Os",
    "-w",
-   "-std=gnu++11",
-   "-fpermissive",
-   "-fno-exceptions",
+   "-std=gnu11",
    "-ffunction-sections",
    "-fdata-sections",
-   "-fno-threadsafe-statics",
-   "-Wno-error=narrowing",
    "-MMD",
    "-flto",
+   "-fno-fat-lto-objects",
    "-mmcu=atmega328p",
    "-DF_CPU=16000000L",
    "-DARDUINO=10607",
@@ -27,11 +24,11 @@
    "-I/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src",
    "-I/home/taci/Arduino/libraries/SD/src",
    "-I/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/SPI/src",
-   "/home/taci/repos/game-station/build/sketch/charades.cpp",
+   "/home/taci/repos/game-station/build/sketch/clist.c",
    "-o",
-   "/home/taci/repos/game-station/build/sketch/charades.cpp.o"
+   "/home/taci/repos/game-station/build/sketch/clist.c.o"
   ],
-  "file": "/home/taci/repos/game-station/build/sketch/charades.cpp"
+  "file": "/home/taci/repos/game-station/build/sketch/clist.c"
  },
  {
   "directory": "/home/taci/repos/game-station",
@@ -95,26 +92,29 @@
    "-I/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src",
    "-I/home/taci/Arduino/libraries/SD/src",
    "-I/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/SPI/src",
-   "/home/taci/repos/game-station/build/sketch/game-station.ino.cpp",
+   "/home/taci/repos/game-station/build/sketch/charades.cpp",
    "-o",
-   "/home/taci/repos/game-station/build/sketch/game-station.ino.cpp.o"
+   "/home/taci/repos/game-station/build/sketch/charades.cpp.o"
   ],
-  "file": "/home/taci/repos/game-station/build/sketch/game-station.ino.cpp"
+  "file": "/home/taci/repos/game-station/build/sketch/charades.cpp"
  },
  {
   "directory": "/home/taci/repos/game-station",
   "arguments": [
-   "/home/taci/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-gcc",
+   "/home/taci/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++",
    "-c",
    "-g",
    "-Os",
    "-w",
-   "-std=gnu11",
+   "-std=gnu++11",
+   "-fpermissive",
+   "-fno-exceptions",
    "-ffunction-sections",
    "-fdata-sections",
+   "-fno-threadsafe-statics",
+   "-Wno-error=narrowing",
    "-MMD",
    "-flto",
-   "-fno-fat-lto-objects",
    "-mmcu=atmega328p",
    "-DF_CPU=16000000L",
    "-DARDUINO=10607",
@@ -126,11 +126,11 @@
    "-I/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src",
    "-I/home/taci/Arduino/libraries/SD/src",
    "-I/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/SPI/src",
-   "/home/taci/repos/game-station/build/sketch/clist.c",
+   "/home/taci/repos/game-station/build/sketch/game-station.ino.cpp",
    "-o",
-   "/home/taci/repos/game-station/build/sketch/clist.c.o"
+   "/home/taci/repos/game-station/build/sketch/game-station.ino.cpp.o"
   ],
-  "file": "/home/taci/repos/game-station/build/sketch/clist.c"
+  "file": "/home/taci/repos/game-station/build/sketch/game-station.ino.cpp"
  },
  {
   "directory": "/home/taci/repos/game-station",
@@ -361,11 +361,11 @@
    "-I/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src",
    "-I/home/taci/Arduino/libraries/SD/src",
    "-I/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/SPI/src",
-   "/home/taci/Arduino/libraries/SD/src/utility/SdFile.cpp",
+   "/home/taci/Arduino/libraries/SD/src/utility/SdVolume.cpp",
    "-o",
-   "/home/taci/repos/game-station/build/libraries/SD/utility/SdFile.cpp.o"
+   "/home/taci/repos/game-station/build/libraries/SD/utility/SdVolume.cpp.o"
   ],
-  "file": "/home/taci/Arduino/libraries/SD/src/utility/SdFile.cpp"
+  "file": "/home/taci/Arduino/libraries/SD/src/utility/SdVolume.cpp"
  },
  {
   "directory": "/home/taci/repos/game-station",
@@ -395,11 +395,11 @@
    "-I/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src",
    "-I/home/taci/Arduino/libraries/SD/src",
    "-I/home/taci/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/SPI/src",
-   "/home/taci/Arduino/libraries/SD/src/utility/SdVolume.cpp",
+   "/home/taci/Arduino/libraries/SD/src/utility/SdFile.cpp",
    "-o",
-   "/home/taci/repos/game-station/build/libraries/SD/utility/SdVolume.cpp.o"
+   "/home/taci/repos/game-station/build/libraries/SD/utility/SdFile.cpp.o"
   ],
-  "file": "/home/taci/Arduino/libraries/SD/src/utility/SdVolume.cpp"
+  "file": "/home/taci/Arduino/libraries/SD/src/utility/SdFile.cpp"
  },
  {
   "directory": "/home/taci/repos/game-station",

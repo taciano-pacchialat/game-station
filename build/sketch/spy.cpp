@@ -1,8 +1,6 @@
 #line 1 "/home/taci/repos/game-station/spy.cpp"
 #include "spy.h"
 
-// returns a binary with the states of the bits
-// if the the button is activated, the position = 1
 unsigned int read_pins()
 {
   unsigned int state = 0;
@@ -185,9 +183,9 @@ int end_screen(LiquidCrystal_I2C &lcd)
   delay(BUTTON_DELAY);
   lcd.clear();
   lcd.backlight();
-  lcd.print("-> para otra");
-  lcd.setCursor(0, 1);
-  lcd.print("<- para salir");
+  lcd.print("Otra?");
+  lcd.setCursor(12, 1);
+  lcd.print(":-)");
   unsigned int state;
   state = read_pins();
   while (1)
@@ -207,7 +205,6 @@ int end_screen(LiquidCrystal_I2C &lcd)
   }
 }
 
-// plays an entire game of the spy
 int spy_game(LiquidCrystal_I2C &lcd, File &nouns)
 {
   lcd.init();

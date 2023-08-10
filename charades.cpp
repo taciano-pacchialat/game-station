@@ -155,6 +155,8 @@ int another_round(LiquidCrystal_I2C &lcd)
   lcd.backlight();
   lcd.setCursor(0, 0);
   lcd.print("Otra?");
+  lcd.setCursor(12, 1);
+  lcd.print(";-)");
   unsigned int state = 0;
   while (1)
   {

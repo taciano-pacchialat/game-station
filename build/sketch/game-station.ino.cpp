@@ -9,20 +9,21 @@
 #define SPY 0
 #define LCDPROP 0x27, 16, 2
 
-#line 10 "/home/taci/repos/game-station/game-station.ino"
+// function for choosing between charades or spy game
+#line 11 "/home/taci/repos/game-station/game-station.ino"
 int start_menu(LiquidCrystal_I2C &lcd);
-#line 37 "/home/taci/repos/game-station/game-station.ino"
+#line 38 "/home/taci/repos/game-station/game-station.ino"
 void setup();
-#line 68 "/home/taci/repos/game-station/game-station.ino"
+#line 69 "/home/taci/repos/game-station/game-station.ino"
 void loop();
-#line 10 "/home/taci/repos/game-station/game-station.ino"
+#line 11 "/home/taci/repos/game-station/game-station.ino"
 int start_menu(LiquidCrystal_I2C &lcd)
 {
   lcd.backlight();
   lcd.setCursor(0, 0);
   lcd.print("<- Espia");
   lcd.setCursor(0, 1);
-  lcd.print("-> Digalo ...");
+  lcd.print("-> Digalo");
   unsigned int state = 0;
   while (1)
   {

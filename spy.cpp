@@ -182,9 +182,9 @@ int end_screen(LiquidCrystal_I2C &lcd)
   delay(BUTTON_DELAY);
   lcd.clear();
   lcd.backlight();
-  lcd.print("-> para otra");
-  lcd.setCursor(0, 1);
-  lcd.print("<- para salir");
+  lcd.print("Otra?");
+  lcd.setCursor(12, 1);
+  lcd.print(":-)");
   unsigned int state;
   state = read_pins();
   while (1)
