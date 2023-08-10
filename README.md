@@ -22,6 +22,13 @@ PD: I'm so sorry about the libraries being in the same directory as the sketch, 
 
 I'd like to say that the software of this project is already cooked up, but obviously bugs will arise. The next step is designing and making a box to put the console into it, and make it look like a nintendo from the 2000's. Media will be uploaded when finished.
 
+## Final Version!
+
+The final version of the Game Station looks like this! (mercy please)
+![game-station-box](./images/project-finished-2.jpg)
+![game-station-box-2](./images/project-finished-1.jpg)
+It was built inside an old router box, giving it a rustic touch.
+
 ### Credits
 
 Thanks to Joaquin "Farmen" Garmendia for helping me with this project, mainly with the word filtering code.
