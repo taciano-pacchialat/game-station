@@ -10,7 +10,7 @@ pretty decent result.
 
 ## Circuit
 
-The circuit looks like this
+The circuit looks like this<br>
 <img src="./images/game-station-circuit.jpeg" alt="game station circuit image" style="width: 50%;">
 This is what you need: a couple of resistors, an I2c LCD display, four buttons and a micro SD card with its micro SD card reader module.
 For the code to work its important that you copy the "unrepeated-nouns.txt" and "unrepeated-verbs.txt" to the SD and rename them as
@@ -24,9 +24,10 @@ I'd like to say that the software of this project is already cooked up, but obvi
 
 ## Final Version!
 
-The final version of the Game Station looks like this! (mercy please)
-<img src="./images/project-finished-2.jpg" alt="game station box image" style="width: 50%;">
-<img src="./images/project-finished-1.jpg" alt="game station box image 2" style="width: 50%;">
+The final version of the Game Station looks like this! (mercy please)<br>
+<img src="./images/project-finished-2.jpg" alt="game station box image" style="width: 35%;">
+<img src="./images/project-finished-1.jpg" alt="game station box image 2" style="width: 35%;"><br>
+
 It was built inside an old router box, giving it a rustic touch.
 
 ### Credits
