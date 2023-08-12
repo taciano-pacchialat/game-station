@@ -213,6 +213,7 @@ int spy_game(LiquidCrystal_I2C &lcd, File &nouns)
   unsigned int state;
   int amount_players = select_players_amount(lcd);
   int amount_spies = select_spy_amount(lcd, amount_players);
+  randomSeed(millis());
   while (1)
   {
     lcd.clear();

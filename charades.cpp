@@ -179,6 +179,7 @@ int another_round(LiquidCrystal_I2C &lcd)
 void charades_game(LiquidCrystal_I2C &lcd, File &nouns, File &verbs)
 {
   int points;
+  randomSeed(millis());
   unsigned long time = set_round_duration(lcd);
   player_prepare(lcd);
   while (1)
