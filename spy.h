@@ -11,6 +11,7 @@
 #include <SPI.h>
 #include <Arduino.h>
 #include "file-managing.h"
+#include <avr/wdt.h>
 
 #define BOFF 1
 #define BON 0

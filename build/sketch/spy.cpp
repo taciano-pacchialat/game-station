@@ -130,6 +130,7 @@ void print_tag(LiquidCrystal_I2C &lcd, int position)
   lcd.setCursor(0, 1);
 }
 
+// checks if the role is spy or player, and prints in lcd according to the role.
 void print_role(LiquidCrystal_I2C &lcd, bool role, String palabra)
 {
   if (role)
@@ -150,21 +151,25 @@ void display_roles(LiquidCrystal_I2C &lcd, bool *roles, int amount_players, Stri
     state = read_pins();
     while (!state)
       state = read_pins();
-
+    // if 'enter' button is pressed
     if (4 & state)
     {
+      // & the tag is displayed, print the role
       if (tag_displayed)
       {
         print_role(lcd, roles[i], text);
         i++;
         tag_displayed = false;
       }
+      // if the tag isn't displayed, display it
       else
       {
         print_tag(lcd, i);
         tag_displayed = true;
       }
     }
+    // if 'undo' button is pressed and we're not in the first player,
+    // go back to the previous one
     else if ((8 & state) && (i > 0))
     {
       tag_displayed = false;

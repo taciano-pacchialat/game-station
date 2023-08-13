@@ -26,6 +26,7 @@ int select_players_amount(LiquidCrystal_I2C &lcd)
   lcd.setCursor(0, 0);
   lcd.print("Jugadores:");
   unsigned int state;
+  wdt_disable();
   while (1)
   {
     print_amount(lcd, players);
@@ -40,6 +41,7 @@ int select_players_amount(LiquidCrystal_I2C &lcd)
         players -= 1;
       else if (4 & state)
       {
+        wdt_enable(9);
         delay(BUTTON_DELAY);
         return players;
       }
@@ -59,6 +61,7 @@ int select_spy_amount(LiquidCrystal_I2C &lcd, int amount_players)
   lcd.setCursor(0, 0);
   lcd.print("Espias:");
   unsigned int state;
+  wdt_disable();
   while (1)
   {
     lcd.setCursor(14, 0);
@@ -72,6 +75,7 @@ int select_spy_amount(LiquidCrystal_I2C &lcd, int amount_players)
       spies -= 1;
     else if (4 & state)
     {
+      wdt_enable(9);
       delay(BUTTON_DELAY);
       return spies;
     }
@@ -129,6 +133,7 @@ void print_tag(LiquidCrystal_I2C &lcd, int position)
   lcd.setCursor(0, 1);
 }
 
+// checks if the role is spy or player, and prints in lcd according to the role.
 void print_role(LiquidCrystal_I2C &lcd, bool role, String palabra)
 {
   if (role)
@@ -144,26 +149,31 @@ void display_roles(LiquidCrystal_I2C &lcd, bool *roles, int amount_players, Stri
   unsigned int state;
   bool tag_displayed = false;
   lcd.backlight();
+  wdt_disable();
   while (i < amount_players)
   {
     state = read_pins();
     while (!state)
       state = read_pins();
-
+    // if 'enter' button is pressed
     if (4 & state)
     {
+      // & the tag is displayed, print the role
       if (tag_displayed)
       {
         print_role(lcd, roles[i], text);
         i++;
         tag_displayed = false;
       }
+      // if the tag isn't displayed, display it
       else
       {
         print_tag(lcd, i);
         tag_displayed = true;
       }
     }
+    // if 'undo' button is pressed and we're not in the first player,
+    // go back to the previous one
     else if ((8 & state) && (i > 0))
     {
       tag_displayed = false;
@@ -175,6 +185,7 @@ void display_roles(LiquidCrystal_I2C &lcd, bool *roles, int amount_players, Stri
     }
     delay(BUTTON_DELAY);
   }
+  wdt_enable(9);
   delay(BUTTON_DELAY);
 }
 
@@ -188,6 +199,7 @@ int end_screen(LiquidCrystal_I2C &lcd)
   lcd.setCursor(12, 1);
   lcd.print(":-)");
   unsigned int state;
+  wdt_disable();
   state = read_pins();
   while (1)
   {
@@ -196,11 +208,13 @@ int end_screen(LiquidCrystal_I2C &lcd)
     if (state & 8)
     {
       delay(BUTTON_DELAY);
+      wdt_enable(9);
       return 0;
     }
     else if (state & 4)
     {
       delay(BUTTON_DELAY);
+      wdt_enable(9);
       return 1;
     }
   }

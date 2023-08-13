@@ -3,14 +3,13 @@
 // prompts the user to input the amount of seconds each round lasts
 unsigned long set_round_duration(LiquidCrystal_I2C &lcd)
 {
-  wdt_reset();
   lcd.clear();
   lcd.backlight();
   unsigned long seconds = 0;
   unsigned int state = 0;
+  wdt_disable();
   while (1)
   {
-    wdt_reset();
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Tiempo:");
@@ -25,6 +24,7 @@ unsigned long set_round_duration(LiquidCrystal_I2C &lcd)
       seconds += 10;
     else if (4 & state)
     {
+      wdt_enable(9);
       delay(BUTTON_DELAY);
       return seconds;
     }

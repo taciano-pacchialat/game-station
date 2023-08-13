@@ -4,6 +4,7 @@
 #include "charades.h"
 #include "file-managing.h"
 #include <LiquidCrystal_I2C.h>
+#include <avr/wdt.h>
 
 #define CHARADES 1
 #define SPY 0
@@ -11,14 +12,47 @@
 
 #define DEBUG 0
 
-// function for choosing between charades or spy game
-#line 13 "/home/taci/repos/game-station/game-station.ino"
 int start_menu(LiquidCrystal_I2C &lcd);
-#line 40 "/home/taci/repos/game-station/game-station.ino"
+
+LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
+File nouns;
+File verbs;
+int game;
+
+#line 20 "/home/taci/repos/game-station/game-station.ino"
 void setup();
-#line 71 "/home/taci/repos/game-station/game-station.ino"
+#line 36 "/home/taci/repos/game-station/game-station.ino"
 void loop();
-#line 13 "/home/taci/repos/game-station/game-station.ino"
+#line 20 "/home/taci/repos/game-station/game-station.ino"
+void setup()
+{
+#if DEBUG
+  Serial.begin(115200);
+#endif
+  lcd.init();
+  lcd.clear();
+  pinMode(CS_PIN, OUTPUT);
+  pinMode(BUTTON1, INPUT);
+  pinMode(BUTTON2, INPUT);
+  pinMode(BUTTON3, INPUT);
+  pinMode(BUTTON4, INPUT);
+  initialize_file(nouns, "nouns.txt");
+  initialize_file(verbs, "verbs.txt");
+}
+
+void loop()
+{
+  game = start_menu(lcd);
+  randomSeed(millis());
+  if (game == CHARADES)
+    charades_game(lcd, nouns, verbs);
+  else
+    spy_game(lcd, nouns);
+  lcd.clear();
+  lcd.backlight();
+}
+
+// function for choosing between charades or spy game
 int start_menu(LiquidCrystal_I2C &lcd)
 {
   lcd.backlight();
@@ -42,41 +76,12 @@ int start_menu(LiquidCrystal_I2C &lcd)
         delay(BUTTON_DELAY);
         return CHARADES;
       }
+      else if (1 & state) // for resetting
+      {
+        wdt_enable(WDTO_15MS); // 15ms timeout
+        while (1)
+          ;
+      }
     }
   }
-}
-
-void setup()
-{
-  Serial.begin(115200);
-  LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
-  lcd.init();
-  lcd.clear();
-  pinMode(CS_PIN, OUTPUT);
-  pinMode(BUTTON1, INPUT);
-  pinMode(BUTTON2, INPUT);
-  pinMode(BUTTON3, INPUT);
-  pinMode(BUTTON4, INPUT);
-  int game;
-  File nouns;
-  initialize_file(nouns, "nouns.txt");
-  File verbs;
-  initialize_file(verbs, "verbs.txt");
-  while (1)
-  {
-    game = start_menu(lcd);
-    randomSeed(millis());
-    if (game == CHARADES)
-      charades_game(lcd, nouns, verbs);
-    else
-      spy_game(lcd, nouns);
-    lcd.clear();
-    lcd.backlight();
-  }
-  nouns.close();
-  verbs.close();
-}
-
-void loop()
-{
 }
