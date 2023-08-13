@@ -224,7 +224,10 @@ int spy_game(LiquidCrystal_I2C &lcd, File &nouns)
     if (end_screen(lcd))
       continue;
     else
+    {
+      free(roles);
       break;
+    }
   }
   delete_list(&words_used);
   return 0;
