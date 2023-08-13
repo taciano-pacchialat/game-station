@@ -8,6 +8,7 @@ unsigned long set_round_duration(LiquidCrystal_I2C &lcd)
   lcd.backlight();
   unsigned long seconds = 0;
   unsigned int state = 0;
+  wdt_disable();
   while (1)
   {
     lcd.clear();
@@ -24,6 +25,7 @@ unsigned long set_round_duration(LiquidCrystal_I2C &lcd)
       seconds += 10;
     else if (4 & state)
     {
+      wdt_enable(9);
       delay(BUTTON_DELAY);
       return seconds;
     }
@@ -34,6 +36,7 @@ unsigned long set_round_duration(LiquidCrystal_I2C &lcd)
 // displays a menu before beginning the round.
 void player_prepare(LiquidCrystal_I2C &lcd)
 {
+  wdt_reset();
   lcd.clear();
   lcd.backlight();
   lcd.setCursor(0, 0);
@@ -41,12 +44,14 @@ void player_prepare(LiquidCrystal_I2C &lcd)
   lcd.setCursor(0, 1);
   lcd.print("- para pasar");
   unsigned int state = 0;
+  wdt_disable();
   while (1)
   {
     while (!state)
       state = read_pins();
     if (4 & state)
     {
+      wdt_enable(9);
       delay(BUTTON_DELAY);
       return;
     }
@@ -76,6 +81,7 @@ String choose_word(LiquidCrystal_I2C &lcd, File &nouns, File &verbs, node **word
 int check_answer()
 {
   unsigned int state;
+  wdt_disable();
   while (1)
   {
     state = read_pins();
@@ -83,11 +89,13 @@ int check_answer()
       state = read_pins();
     if (2 & state)
     {
+      wdt_enable(9);
       delay(BUTTON_DELAY);
       return 1;
     }
     else if (1 & state)
     {
+      wdt_enable(9);
       delay(BUTTON_DELAY);
       return 0;
     }
@@ -106,12 +114,15 @@ int play_round(LiquidCrystal_I2C &lcd, unsigned long time, File &nouns, File &ve
   node *words_used = NULL;             // initialize list
   unsigned long start_time = millis(); // set the starting time of the round
 
+#if DEBUG
   int difference; // DEBUG
-
+#endif
+  wdt_reset();
   while (millis() - start_time <= time)
   {
-    difference = millis() - start_time;
 #if DEBUG
+    difference = millis() - start_time;
+
     Serial.print("difference: ");
     Serial.println(difference);
 #endif
@@ -143,12 +154,14 @@ void print_points(LiquidCrystal_I2C &lcd, int &points)
   lcd.print("Puntaje:");
   lcd.setCursor(10, 1);
   lcd.print(points);
+  wdt_disable();
   while (1)
   {
     while (!state)
       state = read_pins();
     if (4 & state)
     {
+      wdt_enable(9);
       delay(BUTTON_DELAY);
       return;
     }
@@ -165,17 +178,20 @@ int another_round(LiquidCrystal_I2C &lcd)
   lcd.setCursor(12, 1);
   lcd.print(";-)");
   unsigned int state = 0;
+  wdt_disable();
   while (1)
   {
     while (!state)
       state = read_pins();
     if (4 & state)
     {
+      wdt_enable(9);
       delay(BUTTON_DELAY);
       return 1;
     }
     else if (8 & state)
     {
+      wdt_enable(9);
       delay(BUTTON_DELAY);
       return 0;
     }

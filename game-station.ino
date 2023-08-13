@@ -59,6 +59,7 @@ int start_menu(LiquidCrystal_I2C &lcd)
   lcd.setCursor(0, 1);
   lcd.print("-> Digalo");
   unsigned int state = 0;
+  wdt_disable();
   while (1)
   {
     state = read_pins();
@@ -66,13 +67,13 @@ int start_menu(LiquidCrystal_I2C &lcd)
     {
       if (8 & state)
       {
-        wdt_reset();
+        wdt_enable(9);
         delay(BUTTON_DELAY);
         return SPY;
       }
       else if (4 & state)
       {
-        wdt_reset();
+        wdt_enable(9);
         delay(BUTTON_DELAY);
         return CHARADES;
       }

@@ -183,6 +183,12 @@ void display_roles(LiquidCrystal_I2C &lcd, bool *roles, int amount_players, Stri
       else
         i--;
     }
+    else if (1 & state) // for resetting
+    {
+      wdt_enable(WDTO_15MS); // 15ms timeout
+      while (1)
+        ;
+    }
     delay(BUTTON_DELAY);
   }
   wdt_enable(9);
