@@ -81,6 +81,7 @@ int select_spy_amount(LiquidCrystal_I2C &lcd, int amount_players)
   return 0;
 }
 
+#if DEBUG
 void print_bool_array(bool *arg, int dim)
 {
   int i;
@@ -95,6 +96,7 @@ void print_bool_array(bool *arg, int dim)
   }
   Serial.println();
 }
+#endif
 
 // creates an array of bools, each representing
 // a player. True if spy, false if not
@@ -214,6 +216,7 @@ int spy_game(LiquidCrystal_I2C &lcd, File &nouns)
   unsigned int state;
   int amount_players = select_players_amount(lcd);
   int amount_spies = select_spy_amount(lcd, amount_players);
+  randomSeed(millis());
   while (1)
   {
     lcd.clear();
@@ -224,7 +227,10 @@ int spy_game(LiquidCrystal_I2C &lcd, File &nouns)
     if (end_screen(lcd))
       continue;
     else
+    {
+      free(roles);
       break;
+    }
   }
   delete_list(&words_used);
   return 0;

@@ -9,14 +9,16 @@
 #define SPY 0
 #define LCDPROP 0x27, 16, 2
 
+#define DEBUG 0
+
 // function for choosing between charades or spy game
-#line 11 "/home/taci/repos/game-station/game-station.ino"
+#line 13 "/home/taci/repos/game-station/game-station.ino"
 int start_menu(LiquidCrystal_I2C &lcd);
-#line 38 "/home/taci/repos/game-station/game-station.ino"
+#line 40 "/home/taci/repos/game-station/game-station.ino"
 void setup();
-#line 69 "/home/taci/repos/game-station/game-station.ino"
+#line 71 "/home/taci/repos/game-station/game-station.ino"
 void loop();
-#line 11 "/home/taci/repos/game-station/game-station.ino"
+#line 13 "/home/taci/repos/game-station/game-station.ino"
 int start_menu(LiquidCrystal_I2C &lcd)
 {
   lcd.backlight();

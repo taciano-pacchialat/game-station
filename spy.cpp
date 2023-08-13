@@ -80,6 +80,7 @@ int select_spy_amount(LiquidCrystal_I2C &lcd, int amount_players)
   return 0;
 }
 
+#if DEBUG
 void print_bool_array(bool *arg, int dim)
 {
   int i;
@@ -94,6 +95,7 @@ void print_bool_array(bool *arg, int dim)
   }
   Serial.println();
 }
+#endif
 
 // creates an array of bools, each representing
 // a player. True if spy, false if not

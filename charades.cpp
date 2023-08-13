@@ -57,12 +57,16 @@ String choose_word(LiquidCrystal_I2C &lcd, File &nouns, File &verbs, node **word
 {
   if (random(1, 500) % 2)
   {
-    Serial.println("file selected: nouns"); // DEBUG
+#if DEBUG
+    Serial.println("file selected: nouns");
+#endif
     return random_word(nouns, MAX_NOUNS, words_used);
   }
   else
   {
+#if DEBUG
     Serial.println("file selected: verbs"); // DEBUG
+#endif
     return random_word(verbs, MAX_VERBS, words_used);
   }
 }
@@ -105,18 +109,20 @@ int play_round(LiquidCrystal_I2C &lcd, unsigned long time, File &nouns, File &ve
 
   while (millis() - start_time <= time)
   {
-    // DEBUG
     difference = millis() - start_time;
+#if DEBUG
     Serial.print("difference: ");
     Serial.println(difference);
-
+#endif
     lcd.backlight();
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Palabra:");
     lcd.setCursor(0, 1);
     current_word = choose_word(lcd, nouns, verbs, &words_used);
+#if DEBUG
     Serial.println(current_word);
+#endif
     lcd.print(current_word);
     points += check_answer();
   }
