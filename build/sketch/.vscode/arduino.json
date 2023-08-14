@@ -1,8 +1,0 @@
-#line 1 "/home/taci/repos/game-station/.vscode/arduino.json"
-{
-    "board": "arduino:avr:uno",
-    "sketch": "game-station.ino",
-    "port": "/dev/ttyACM0",
-    "output": "./build",
-    "programmer": "avrisp"
-}

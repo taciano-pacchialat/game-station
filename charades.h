@@ -3,7 +3,7 @@
 
 /*
   Library for charades game.
- */
+*/
 
 #include <LiquidCrystal_I2C.h>
 #include <Arduino.h>

@@ -1,4 +1,5 @@
-#include "charades.h"
+#include "./charades.h"
+#include "Arduino.h"
 
 // prompts the user to input the amount of seconds each round lasts
 unsigned long set_round_duration(LiquidCrystal_I2C &lcd)

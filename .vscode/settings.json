@@ -2,5 +2,7 @@
   "C_Cpp.errorSquiggles": "enabled",
   "arduino.enableUSBDetection": false,
   "arduino.path": "",
-  "arduino.useArduinoCli": true
+  "arduino.useArduinoCli": true,
+  "arduino.additionalUrls": [],
+  "C_Cpp.default.compilerPath": "/home/taci/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++"
 }
