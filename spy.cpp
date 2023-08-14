@@ -164,6 +164,7 @@ void display_roles(LiquidCrystal_I2C &lcd, bool *roles, int amount_players, Stri
         print_role(lcd, roles[i], text);
         i++;
         tag_displayed = false;
+        delay(BUTTON_DELAY);
       }
       // if the tag isn't displayed, display it
       else
