@@ -33,13 +33,13 @@ void setup()
   initialize_file(nouns, "nouns.txt");
   initialize_file(verbs, "verbs.txt");
   atexit(atReset);
+  wdt_enable(6); // watchdog to 1s
 }
 
 void loop()
 {
   wdt_reset();
   game = start_menu(lcd);
-  wdt_reset();
   randomSeed(millis());
   if (game == CHARADES)
     charades_game(lcd, nouns, verbs);
@@ -52,7 +52,6 @@ void loop()
 // function for choosing between charades or spy game
 int start_menu(LiquidCrystal_I2C &lcd)
 {
-  wdt_enable(9); // set a reset in 8 seconds
   lcd.backlight();
   lcd.setCursor(0, 0);
   lcd.print("<- Espia");
@@ -67,13 +66,13 @@ int start_menu(LiquidCrystal_I2C &lcd)
     {
       if (8 & state)
       {
-        wdt_enable(9);
+        wdt_enable(6);
         delay(BUTTON_DELAY);
         return SPY;
       }
       else if (4 & state)
       {
-        wdt_enable(9);
+        wdt_enable(6);
         delay(BUTTON_DELAY);
         return CHARADES;
       }

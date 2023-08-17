@@ -41,9 +41,15 @@ int select_players_amount(LiquidCrystal_I2C &lcd)
         players -= 1;
       else if (4 & state)
       {
-        wdt_enable(9);
+        wdt_enable(6);
         delay(BUTTON_DELAY);
         return players;
+      }
+      else if (8 & state)
+      {
+        wdt_enable(WDTO_15MS);
+        while (1)
+          ;
       }
     }
     delay(BUTTON_DELAY);
@@ -75,9 +81,15 @@ int select_spy_amount(LiquidCrystal_I2C &lcd, int amount_players)
       spies -= 1;
     else if (4 & state)
     {
-      wdt_enable(9);
+      wdt_enable(6);
       delay(BUTTON_DELAY);
       return spies;
+    }
+    else if (8 & state)
+    {
+      wdt_enable(WDTO_15MS);
+      while (1)
+        ;
     }
     delay(BUTTON_DELAY);
   }
@@ -184,15 +196,9 @@ void display_roles(LiquidCrystal_I2C &lcd, bool *roles, int amount_players, Stri
       else
         i--;
     }
-    else if (1 & state) // for resetting
-    {
-      wdt_enable(WDTO_15MS); // 15ms timeout
-      while (1)
-        ;
-    }
     delay(BUTTON_DELAY);
   }
-  wdt_enable(9);
+  wdt_enable(6);
   delay(BUTTON_DELAY);
 }
 
@@ -215,13 +221,13 @@ int end_screen(LiquidCrystal_I2C &lcd)
     if (state & 8)
     {
       delay(BUTTON_DELAY);
-      wdt_enable(9);
+      wdt_enable(6);
       return 0;
     }
     else if (state & 4)
     {
       delay(BUTTON_DELAY);
-      wdt_enable(9);
+      wdt_enable(6);
       return 1;
     }
   }
@@ -234,16 +240,23 @@ int spy_game(LiquidCrystal_I2C &lcd, File &nouns)
   node *words_used = NULL;
   String current_word;
   unsigned int state;
+  wdt_reset();
   int amount_players = select_players_amount(lcd);
+  wdt_reset();
   int amount_spies = select_spy_amount(lcd, amount_players);
+  wdt_reset();
   randomSeed(millis());
   while (1)
   {
     lcd.clear();
     lcd.backlight();
+    wdt_reset();
     bool *roles = set_spy(amount_players, amount_spies);
+    wdt_reset();
     String text = random_word(nouns, MAX_NOUNS, &words_used);
+    wdt_reset();
     display_roles(lcd, roles, amount_players, text);
+    wdt_reset();
     if (end_screen(lcd))
       continue;
     else
