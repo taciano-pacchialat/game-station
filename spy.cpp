@@ -235,6 +235,7 @@ int end_screen(LiquidCrystal_I2C &lcd)
 
 int spy_game(LiquidCrystal_I2C &lcd, File &nouns)
 {
+  wdt_reset();
   lcd.init();
   lcd.backlight();
   node *words_used = NULL;

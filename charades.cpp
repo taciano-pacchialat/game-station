@@ -92,15 +92,15 @@ String choose_word(LiquidCrystal_I2C &lcd, File &nouns, File &verbs, node **word
 }
 
 // checks if the user skipped or guessed.
-int check_answer()
+int check_answer(int start_time, int time)
 {
   wdt_reset();
   unsigned int state;
   wdt_disable();
-  while (1)
+  while (1 && (millis() - start_time <= time))
   {
     state = read_pins();
-    while (!state)
+    while (!state && (millis() - start_time <= time))
       state = read_pins();
     if (2 & state)
     {
@@ -121,6 +121,7 @@ int check_answer()
         ;
     }
   }
+  return 0;
 }
 
 // plays a round until the time limit hasn't been trespassed.
@@ -128,6 +129,7 @@ int check_answer()
 int play_round(LiquidCrystal_I2C &lcd, unsigned long time, File &nouns, File &verbs)
 {
   wdt_reset();
+  unsigned int state = 0;
   String current_word;
   unsigned int points = 0;
   time *= 1000; // convert from seconds to milliseconds
@@ -157,7 +159,7 @@ int play_round(LiquidCrystal_I2C &lcd, unsigned long time, File &nouns, File &ve
     Serial.println(current_word);
 #endif
     lcd.print(current_word);
-    points += check_answer();
+    points += check_answer(start_time, time);
   }
   delete_list(&words_used);
   return points;

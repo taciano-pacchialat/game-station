@@ -76,12 +76,6 @@ int start_menu(LiquidCrystal_I2C &lcd)
         delay(BUTTON_DELAY);
         return CHARADES;
       }
-      else if (1 & state) // for resetting
-      {
-        wdt_enable(WDTO_15MS); // 15ms timeout
-        while (1)
-          ;
-      }
     }
   }
 }
