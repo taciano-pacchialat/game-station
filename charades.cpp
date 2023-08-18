@@ -4,6 +4,7 @@
 // prompts the user to input the amount of seconds each round lasts
 unsigned long set_round_duration(LiquidCrystal_I2C &lcd)
 {
+  wdt_reset();
   lcd.clear();
   lcd.backlight();
   unsigned long seconds = 0;
@@ -25,9 +26,15 @@ unsigned long set_round_duration(LiquidCrystal_I2C &lcd)
       seconds += 10;
     else if (4 & state)
     {
-      wdt_enable(9);
+      wdt_enable(6);
       delay(BUTTON_DELAY);
       return seconds;
+    }
+    else if (8 & state)
+    {
+      wdt_enable(WDTO_15MS);
+      while (1)
+        ;
     }
     delay(BUTTON_DELAY);
   }
@@ -51,9 +58,15 @@ void player_prepare(LiquidCrystal_I2C &lcd)
       state = read_pins();
     if (4 & state)
     {
-      wdt_enable(9);
+      wdt_enable(6);
       delay(BUTTON_DELAY);
       return;
+    }
+    else if (8 & state)
+    {
+      wdt_enable(WDTO_15MS);
+      while (1)
+        ;
     }
   }
 }
@@ -61,6 +74,7 @@ void player_prepare(LiquidCrystal_I2C &lcd)
 // chooses a random word of either verbs or nouns.
 String choose_word(LiquidCrystal_I2C &lcd, File &nouns, File &verbs, node **words_used)
 {
+  wdt_reset();
   if (random(1, 500) % 2)
   {
 #if DEBUG
@@ -80,6 +94,7 @@ String choose_word(LiquidCrystal_I2C &lcd, File &nouns, File &verbs, node **word
 // checks if the user skipped or guessed.
 int check_answer()
 {
+  wdt_reset();
   unsigned int state;
   wdt_disable();
   while (1)
@@ -89,15 +104,21 @@ int check_answer()
       state = read_pins();
     if (2 & state)
     {
-      wdt_enable(9);
+      wdt_enable(6);
       delay(BUTTON_DELAY);
       return 1;
     }
     else if (1 & state)
     {
-      wdt_enable(9);
+      wdt_enable(6);
       delay(BUTTON_DELAY);
       return 0;
+    }
+    else if (8 & state)
+    {
+      wdt_enable(WDTO_15MS);
+      while (1)
+        ;
     }
   }
 }
@@ -106,6 +127,7 @@ int check_answer()
 // returns the points obtained by the player.
 int play_round(LiquidCrystal_I2C &lcd, unsigned long time, File &nouns, File &verbs)
 {
+  wdt_reset();
   String current_word;
   unsigned int points = 0;
   time *= 1000; // convert from seconds to milliseconds
@@ -117,7 +139,6 @@ int play_round(LiquidCrystal_I2C &lcd, unsigned long time, File &nouns, File &ve
 #if DEBUG
   int difference; // DEBUG
 #endif
-  wdt_reset();
   while (millis() - start_time <= time)
   {
 #if DEBUG
@@ -145,6 +166,7 @@ int play_round(LiquidCrystal_I2C &lcd, unsigned long time, File &nouns, File &ve
 // prints in the lcd the points and awaits for -> button.
 void print_points(LiquidCrystal_I2C &lcd, int &points)
 {
+  wdt_reset();
   unsigned int state = 0;
   lcd.clear();
   lcd.backlight();
@@ -161,9 +183,15 @@ void print_points(LiquidCrystal_I2C &lcd, int &points)
       state = read_pins();
     if (4 & state)
     {
-      wdt_enable(9);
+      wdt_enable(6);
       delay(BUTTON_DELAY);
       return;
+    }
+    else if (8 & state)
+    {
+      wdt_enable(WDTO_15MS);
+      while (1)
+        ;
     }
   }
 }
@@ -171,6 +199,7 @@ void print_points(LiquidCrystal_I2C &lcd, int &points)
 // asks the user if he/she wants to play another round
 int another_round(LiquidCrystal_I2C &lcd)
 {
+  wdt_reset();
   lcd.clear();
   lcd.backlight();
   lcd.setCursor(0, 0);
@@ -185,13 +214,13 @@ int another_round(LiquidCrystal_I2C &lcd)
       state = read_pins();
     if (4 & state)
     {
-      wdt_enable(9);
+      wdt_enable(6);
       delay(BUTTON_DELAY);
       return 1;
     }
     else if (8 & state)
     {
-      wdt_enable(9);
+      wdt_enable(6);
       delay(BUTTON_DELAY);
       return 0;
     }
